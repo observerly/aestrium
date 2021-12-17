@@ -7,3 +7,9 @@ export {
   UseCanvasReturn,
   UseCanvasProps
 } from '@/composables/useCanvas'
+export {
+  useInteractions,
+  UseInteractionsOptions,
+  UseInteractionsReturn,
+  UseInteractionsProps
+} from '@/composables/useInteractions'
