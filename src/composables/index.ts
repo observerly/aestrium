@@ -8,6 +8,11 @@ export {
   UseCanvasProps
 } from '@/composables/useCanvas'
 export {
+  useDimensions,
+  UseDimensionsReturn,
+  UseDimensionsProps
+} from '@/composables/useDimensions'
+export {
   useInteractions,
   UseInteractionsOptions,
   UseInteractionsReturn,
