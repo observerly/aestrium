@@ -7,6 +7,14 @@ export {
   UseCanvasReturn,
   UseCanvasProps
 } from '@/composables/useCanvas'
+
+export {
+  useCardinals,
+  UseCardinalsOptions,
+  UseCardinalsReturn,
+  UseCardinalsProps
+} from '@/composables/useCardinals'
+
 export {
   useDimensions,
   UseDimensionsReturn,
