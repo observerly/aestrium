@@ -37,8 +37,8 @@ export const useDimensions = () => {
 
   const dimensions = computed<Cartesian2DCoordinate>(() => {
     return {
-      x: x.value,
-      y: y.value
+      x: x.value * resolution.value,
+      y: y.value * resolution.value
     }
   })
 
