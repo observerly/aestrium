@@ -43,3 +43,10 @@ export {
   fetchMajorStars,
   fetchMinorStars,
 } from '@/composables/useStars'
+
+export {
+  useSun,
+  UseSunOptions,
+  UseSunReturn,
+  UseSunProps
+} from '@/composables/useSun'
