@@ -35,6 +35,13 @@ export {
 } from '@/composables/useInteractions'
 
 export {
+  useMoon,
+  UseMoonOptions,
+  UseMoonReturn,
+  UseMoonProps
+} from '@/composables/useMoon'
+
+export {
   useStars,
   UseStarsOptions,
   UseStarsReturn,
