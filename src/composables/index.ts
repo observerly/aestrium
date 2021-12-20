@@ -16,6 +16,13 @@ export {
 } from '@/composables/useCardinals'
 
 export {
+  useConstellations,
+  UseConstellationOptions,
+  UseConstellationsReturn,
+  UseConstellationsProps
+} from '@/composables/useConstellations'
+
+export {
   useDimensions,
   UseDimensionsReturn,
   UseDimensionsProps
