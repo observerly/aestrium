@@ -17,7 +17,7 @@ const hasBayer = (star: Star): boolean => star.bayerDesignation.length > 0
 
 const hasIAU = (star: Star): boolean => star.iauName.length > 0
 
-export interface UseStarOptions {
+export interface UseStarsOptions {
   /**
    * 
    * Longitude coordinate {in degrees}
@@ -179,7 +179,7 @@ export { useMagnitude  as useStarsMagnitude }
  * @param options of type UseStarOptions
  * @output
  */
-export const useStars = (options: UseStarOptions) => {
+export const useStars = (options: UseStarsOptions) => {
   const {
     longitude,
     latitude,

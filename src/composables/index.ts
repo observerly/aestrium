@@ -36,7 +36,7 @@ export {
 
 export {
   useStars,
-  UseStarOptions,
+  UseStarsOptions,
   UseStarsReturn,
   UseStarsProps,
   useStarsMagnitude,
