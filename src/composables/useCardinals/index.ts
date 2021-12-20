@@ -1,8 +1,4 @@
-import { computed, ref } from 'vue'
-
-import type {
-  ComputedRef
-} from 'vue'
+import { computed, ComputedRef, ref, Ref  } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
@@ -11,15 +7,9 @@ import {
 } from '@observerly/celestia'
 
 import type {
-  GeographicPointCoordinate,
+  Cartesian2DCoordinate,
   HorizontalCoordinate
 } from '@observerly/celestia'
-
-import type {
-  SkyViewerCanvas,
-  SkyViewerObserverOffset,
-  SkyViewerCanvasRenderingContext2D
-} from '@/types'
 
 export interface Cardinal {
   /**
@@ -54,22 +44,29 @@ export interface Cardinal {
 export interface UseCardinalsOptions {
   /**
    * 
-   * computed canvas object representing the width and height dimensions of the canvas:
+   * Azimuthal Offset
    * 
    */
-  canvas: ComputedRef<SkyViewerCanvas>
+  azOffset: Ref<number>
   /**
    * 
-   * observer object representing a longitude and latitude position, as well as an observed offset:
+   * Altitudinal Offset
    * 
    */
-  observer: GeographicPointCoordinate & SkyViewerObserverOffset
+  altOffset: Ref<number>
   /**
    * 
-   * A boolean flag for if cardinals are shown:
+   * Dimenions (Width & Height) of the Projection Surface:
    * 
    */
-  show: boolean
+  dimensions: ComputedRef<Cartesian2DCoordinate>
+  /**
+   * 
+   * 
+   * Screen Resolution
+   * 
+   */
+  resolution: ComputedRef<number>
 }
 
 /**
@@ -82,9 +79,14 @@ export interface UseCardinalsOptions {
 export const useCardinals = (
   options: UseCardinalsOptions
 ) => {
-  const { canvas, observer, show } = options
+  const {
+    azOffset,
+    altOffset,
+    dimensions,
+    resolution
+  } = options
 
-  const showCardinals = ref(show)
+  const showCardinals = ref(true)
 
   const toggleCardinals = () => {
     showCardinals.value = !showCardinals.value
@@ -102,24 +104,24 @@ export const useCardinals = (
   )
 
   const yOffset = computed(() => {
-    return canvas.value.height - 20
+    return dimensions.value.y - 20
   })
 
   const getCardinal = (
     { az, alt }: HorizontalCoordinate,
     display: 'N' | 'E' | 'S' | 'W' | 'NE' | 'NW' | 'SE' | 'SW'
   ): Cardinal => {
-    alt -= observer.altitudinalOffset.value
+    alt -= altOffset.value
 
-    az -= observer.azimuthalOffset.value
+    az -= azOffset.value
 
     const { x } = stereoProjectHorizontalToCartesian2DCoordinate(
       {
         alt: alt,
         az: az
       },
-      canvas.value.width,
-      canvas.value.height
+      dimensions.value.x,
+      dimensions.value.y
     )
 
     return {
@@ -145,23 +147,21 @@ export const useCardinals = (
     return cardinals
   })
 
-  // Draw Cardinal Directions (N,E,S,W) from their azimuthal definitions:
+  // Draw Cardinal Directions from their azimuthal definitions:
   const drawCardinals = (
-    ctx: SkyViewerCanvasRenderingContext2D,
+    ctx: Ref<OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null>,
     fillStyle: string,
-    scaling: number
-  ): SkyViewerCanvasRenderingContext2D => {
-    const fontSize = scaling * 12
-
-    ctx.fillStyle = fillStyle
-    ctx.font = `${fontSize}px "system-ui"`
-    ctx.textAlign = 'center'
+  ): void => {
+    if (ctx.value) {
+      const fontSize = resolution.value * 12
+      ctx.value.fillStyle = fillStyle
+      ctx.value.font = `${fontSize}px "system-ui"`
+      ctx.value.textAlign = 'center'      
+    }
 
     cardinals.value.forEach(cardinal => {
-      ctx.fillText(cardinal.display, cardinal.x, cardinal.y)
+      ctx.value ? ctx.value.fillText(cardinal.display, cardinal.x, cardinal.y) : null
     })
-
-    return ctx
   }
 
   return {
