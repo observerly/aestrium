@@ -26,3 +26,13 @@ export {
   UseInteractionsReturn,
   UseInteractionsProps
 } from '@/composables/useInteractions'
+
+export {
+  useStars,
+  UseStarOptions,
+  UseStarsReturn,
+  UseStarsProps,
+  useStarsMagnitude,
+  fetchMajorStars,
+  fetchMinorStars,
+} from '@/composables/useStars'
