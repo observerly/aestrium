@@ -79,7 +79,7 @@ export interface UseMoonOptions {
   y: Ref<number>
   /**
    * 
-   * show constellations boolean
+   * show the moon boolean
    * 
    */
   show: boolean
