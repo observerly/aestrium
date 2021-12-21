@@ -27,6 +27,14 @@ export {
   UseDimensionsReturn,
   UseDimensionsProps
 } from '@/composables/useDimensions'
+
+export {
+  useEcliptic,
+  UseEclipticOptions,
+  UseEclipticReturn,
+  UseEclipticProps,
+} from '@/composables/useEcliptic'
+
 export {
   useInteractions,
   UseInteractionsOptions,
