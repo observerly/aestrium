@@ -92,7 +92,7 @@ export interface StarObservedRelativeExtended extends StarObservedRelative {
  */
 export const fetchMajorStars = async () => {
   try {
-    const response = await fetch('http://192.168.178.26:8083/api/v1/stars/major')
+    const response = await fetch('https://observerly.com/api/v2/stars/major')
     return await response.json()
   } catch {
     return []
@@ -106,7 +106,7 @@ export const fetchMajorStars = async () => {
  */
 export const fetchMinorStars = async () => {
   try {
-    const response = await fetch('http://192.168.178.26:8083/api/v1/stars/minor')
+    const response = await fetch('https://observerly.com/api/v2/stars/minor')
     return await response.json()
   } catch {
     return []
