@@ -11,7 +11,7 @@ import {
   StarObservedRelative
 } from '@observerly/celestia'
 
-import { drawBody, isIntersecting } from '@/utils'
+import { drawBody, intersectDistance } from '@/utils'
 
 const hasBayer = (star: Star): boolean => star.bayerDesignation.length > 0
 
@@ -253,7 +253,7 @@ export const useStars = (options: UseStarsOptions) => {
           y: star.y,
           angularDiameter:
             convertMagnitudeToIAUScalar(parseInt(s.apparentMagnitude), 3.5) * scaling * 0.35,
-          intersectDistance: isIntersecting(
+          intersectDistance: intersectDistance(
             {
               x: x.value * pixelRatio,
               y: y.value * pixelRatio
