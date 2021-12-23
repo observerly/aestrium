@@ -1,9 +1,4 @@
 export {
-  SkyViewerCanvas,
-  SkyViewerCanvasRenderingContext2D,
-  SkyViewerGradientColorStop,
-  SkyViewerObserverOffset,
   SkyViewerOptions,
-  SkyViewerOrientation,
-  SkyViewerPosition,
+  SkyViewerPosition 
 } from './SkyViewer'
