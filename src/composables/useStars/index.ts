@@ -94,7 +94,8 @@ export const fetchMajorStars = async () => {
   try {
     const response = await fetch('https://observerly.com/api/v2/stars/major')
     return await response.json()
-  } catch {
+  } catch (err) {
+    console.error(err)
     return []
   }
 }
@@ -108,7 +109,8 @@ export const fetchMinorStars = async () => {
   try {
     const response = await fetch('https://observerly.com/api/v2/stars/minor')
     return await response.json()
-  } catch {
+  } catch (err) {
+    console.error(err)
     return []
   }
 }
