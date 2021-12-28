@@ -59,7 +59,7 @@ import {
 } from '@/composables'
 
 export default defineComponent({
-  name: 'CelestiaSkyViewer',
+  name: 'SkyViewer',
   props: {
     clock: {
       type: Object as PropType<UseInternalClockReturn>,
