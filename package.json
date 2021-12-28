@@ -1,6 +1,24 @@
 {
   "name": "@observerly/aestrium",
   "version": "0.1.0",
+  "description": "The aestrium Sky Viewer Vite & Vue.js (Vue 3 + Typescript) Component Library by observerly",
+  "repository": "https://github.com/observerly/aestrium.git",
+  "author": "Michael Roberts <michael@observerly.com>",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/aestrium.es.js",
+  "types": "./dist/src/index.d.ts",
+  "module": "./dist/aestrium.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/aestrium.es.js",
+      "require": "./dist/aestrium.umd.js"
+    }
+  },
+  "unpkg": "./dist/aestrium.umd.js",
+  "jsdelivr": "./dist/aestrium.umd.js",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
