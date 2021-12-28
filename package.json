@@ -1,6 +1,6 @@
 {
   "name": "@observerly/aestrium",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The aestrium Sky Viewer Vite & Vue.js (Vue 3 + Typescript) Component Library by observerly",
   "repository": "https://github.com/observerly/aestrium.git",
   "author": "Michael Roberts <michael@observerly.com>",
