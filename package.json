@@ -28,9 +28,9 @@
     "format": "prettier .  --write"
   },
   "dependencies": {
-    "@observerly/celestia": "^0.19.1",
-    "@observerly/useaestrium": "^0.10.0",
-    "@vueuse/core": "^7.3.0",
+    "@observerly/celestia": "^0.19.3",
+    "@observerly/useaestrium": "^0.11.3",
+    "@vueuse/core": "^7.4.1",
     "@vueuse/gesture": "^1.0.0",
     "vue": "^3.2.26"
   },
