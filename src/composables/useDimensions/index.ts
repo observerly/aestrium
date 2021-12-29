@@ -4,15 +4,15 @@ import { useDevicePixelRatio, useResizeObserver, useWindowSize } from '@vueuse/c
 
 import { Cartesian2DCoordinate } from '@observerly/celestia'
 
-// Obtain the Device Pixel Ratio:
-const { pixelRatio } = useDevicePixelRatio()
-
 /**
  * 
  * reactive useDimensions()
  * 
  */
 export const useDimensions = () => {
+  // Obtain the Device Pixel Ratio:
+  const { pixelRatio } = useDevicePixelRatio()
+  
   // This is the HTMLElement root element as a ref:
   const root = ref<HTMLElement | null>(null)
 
