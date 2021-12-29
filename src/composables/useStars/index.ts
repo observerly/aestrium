@@ -195,24 +195,35 @@ export const useStars = (options: UseStarsOptions) => {
     y
   } = options
 
-  const stars = ref<Star[]>([])
-
   const majorStars = ref([])
+
+  const fetchMajorStars = async () => {
+    const response = await fetch('https://observerly.com/api/v2/stars/major')
+    majorStars.value = await response.json()
+  }
 
   const minorStars = ref([])
 
+  const fetchMinorStars = async () => {
+    const response = await fetch('https://observerly.com/api/v2/stars/minor')
+    minorStars.value = await response.json()
+  }
+
+  onMounted(() => {
+    fetchMajorStars()
+    fetchMinorStars()
+  })
+
   const { limit, scaling } = useMagnitude()
 
-  onMounted(async () => {
-    majorStars.value = await fetchMajorStars()
-    minorStars.value = await fetchMinorStars()
-    stars.value = [...majorStars.value, ...minorStars.value].filter(
+  const intersectingRadius = ref(30)
+
+  const stars = computed<Star[]>(() => {
+    return [...majorStars.value, ...minorStars.value].filter(
       (s: Star) =>
         parseFloat(s.apparentMagnitude) <= limit.value && (hasBayer(s) || hasIAU(s))
     )
   })
-
-  const intersectingRadius = ref(30)
 
   const _s = computed<StarObservedRelativeExtended[]>(() => {
     const width = dimensions.value.x
