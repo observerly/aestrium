@@ -2,14 +2,14 @@ import { computed, ComputedRef, ref, Ref  } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
-import {
-  stereoProjectHorizontalToCartesian2DCoordinate
-} from '@observerly/celestia'
-
 import type {
-  Cartesian2DCoordinate,
+  CartesianCoordinate,
   HorizontalCoordinate
-} from '@observerly/celestia'
+} from '@observerly/polaris'
+
+import{
+  convertHorizontalToStereo
+} from '@observerly/polaris'
 
 export interface Cardinal {
   /**
@@ -59,7 +59,7 @@ export interface UseCardinalsOptions {
    * Dimenions (Width & Height) of the Projection Surface:
    * 
    */
-  dimensions: ComputedRef<Cartesian2DCoordinate>
+  dimensions: ComputedRef<CartesianCoordinate>
   /**
    * 
    * 
@@ -115,7 +115,7 @@ export const useCardinals = (
 
     az -= azOffset.value
 
-    const { x } = stereoProjectHorizontalToCartesian2DCoordinate(
+    const { x } = convertHorizontalToStereo(
       {
         alt: alt,
         az: az

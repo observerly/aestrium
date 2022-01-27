@@ -4,7 +4,9 @@ import { throttledWatch } from '@vueuse/core'
 
 import { useDimensions } from '@/composables'
 
-import { Cartesian2DCoordinate } from '@observerly/celestia'
+import type {
+  CartesianCoordinate
+} from '@observerly/polaris'
 
 export type UseCanvasReturn = {
   /**
@@ -36,7 +38,7 @@ export type UseCanvasReturn = {
    * Our predetermined canvas dimensions (width, height)
    * 
    */
-  dimensions: ComputedRef<Cartesian2DCoordinate>
+  dimensions: ComputedRef<CartesianCoordinate>
   /**
    * 
    * The resolution of our Canvas

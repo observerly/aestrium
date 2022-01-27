@@ -3,17 +3,19 @@ import { computed, ref, ComputedRef, Ref } from 'vue'
 import { onKeyStroke } from '@vueuse/core'
 
 import {
-  getMoon,
-  getLunarEquatorialCoordinate,
   convertEquatorialToHorizontal,
-  stereoProjectHorizontalToCartesian2DCoordinate,
-  Cartesian2DCoordinate,
-  MoonObservedRelative
-} from '@observerly/celestia'
+  convertHorizontalToStereo,
+  getMoon
+} from '@observerly/polaris'
+
+import type {
+  CartesianCoordinate,
+  Moon
+} from '@observerly/polaris'
 
 import { drawBody } from '@/utils'
 
-export type Moon = MoonObservedRelative
+export type MoonObserved = Moon & CartesianCoordinate
 
 export interface UseMoonOptions {
   /**
@@ -45,7 +47,7 @@ export interface UseMoonOptions {
    * Dimenions (Width & Height) of the Projection Surface:
    * 
    */
-  dimensions: ComputedRef<Cartesian2DCoordinate>
+  dimensions: ComputedRef<CartesianCoordinate>
   /**
    * 
    * 
@@ -128,12 +130,12 @@ export const useMoon = (options: UseMoonOptions) => {
     }
   )
 
-  const moon = computed<MoonObservedRelative>(() => {
+  const moon = computed<MoonObserved>(() => {
     const width = dimensions.value.x
 
     const height = dimensions.value.y
 
-    const { ra, dec } = getLunarEquatorialCoordinate(datetime.value)
+    const { ra, dec, illumination, inclination, obliquity, phase, siderealMonth, synodicMonth } = getMoon(datetime.value)
 
     let { alt, az } = convertEquatorialToHorizontal(
       {
@@ -151,7 +153,7 @@ export const useMoon = (options: UseMoonOptions) => {
 
     az -= azOffset.value
 
-    const { x, y } = stereoProjectHorizontalToCartesian2DCoordinate(
+    const { x, y } = convertHorizontalToStereo(
       {
         alt: alt,
         az: az
@@ -160,12 +162,15 @@ export const useMoon = (options: UseMoonOptions) => {
       height
     )
 
-    const moon = getMoon(datetime.value)
-
     return {
-      ...moon,
       ra,
       dec,
+      illumination,
+      inclination,
+      obliquity,
+      phase,
+      siderealMonth,
+      synodicMonth,
       alt,
       az,
       x,
@@ -177,12 +182,12 @@ export const useMoon = (options: UseMoonOptions) => {
   const drawMoon = (
     ctx: Ref<OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null>
   ): void => {
-    const { angularDiameter, x, y } = moon.value
+    const { x, y } = moon.value
 
     const precision = resolution.value
 
     // Calculate the Apparent Angular Diameter as observed from our observed location:
-    const radius = 10 * angularDiameter * precision
+    const radius = 10 * 0.6880 * precision
 
     // Draw the Moon HTMLImageElement on the canvas.ctx:
     if (x >= 0 && y >= 0 && ctx.value) {

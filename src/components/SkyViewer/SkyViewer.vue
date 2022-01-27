@@ -23,8 +23,7 @@
 <script lang="ts">
 import { 
   computed, 
-  defineComponent, 
-  h,
+  defineComponent,
   onMounted, 
   PropType,
   toRef,
@@ -165,7 +164,7 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showSun ? props.options.showSun : false
+      show: props.options.showSun ? props.options.showSun : true
     })
 
     // Setup the Moon:
@@ -184,7 +183,7 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showMoon ? props.options.showMoon : false
+      show: props.options.showMoon ? props.options.showMoon : true
     })
 
     // Setup the Ecliptic:

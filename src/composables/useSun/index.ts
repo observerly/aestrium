@@ -3,14 +3,17 @@ import { computed, ref, ComputedRef, Ref } from 'vue'
 import { onKeyStroke } from '@vueuse/core'
 
 import {
-  getSolarEquatorialCoordinate,
+  getSun,
   convertEquatorialToHorizontal,
-  stereoProjectHorizontalToCartesian2DCoordinate,
-  Cartesian2DCoordinate,
-  SunObservedRelative
-} from '@observerly/celestia'
+  convertHorizontalToStereo
+} from '@observerly/polaris'
 
-export type Sun = SunObservedRelative
+import type {
+  CartesianCoordinate,
+  Sun
+} from '@observerly/polaris'
+
+export type SunObserved = Sun & CartesianCoordinate
 
 export interface UseSunOptions {
   /**
@@ -42,7 +45,7 @@ export interface UseSunOptions {
    * Dimenions (Width & Height) of the Projection Surface:
    * 
    */
-  dimensions: ComputedRef<Cartesian2DCoordinate>
+  dimensions: ComputedRef<CartesianCoordinate>
   /**
    * 
    * 
@@ -118,12 +121,12 @@ export const useSun = (
     }
   )
 
-  const sun = computed<Sun>(() => {
+  const sun = computed<SunObserved>(() => {
     const width = dimensions.value.x
 
     const height = dimensions.value.y
     
-    const { ra, dec } = getSolarEquatorialCoordinate(datetime.value)
+    const { ra, dec } = getSun(datetime.value)
 
     let { alt, az } = convertEquatorialToHorizontal(
       {
@@ -141,7 +144,7 @@ export const useSun = (
 
     az -= azOffset.value
 
-    const { x, y } = stereoProjectHorizontalToCartesian2DCoordinate(
+    const { x, y } = convertHorizontalToStereo(
       {
         alt: alt,
         az: az

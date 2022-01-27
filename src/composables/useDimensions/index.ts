@@ -2,7 +2,9 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 import { useDevicePixelRatio, useResizeObserver, useWindowSize } from '@vueuse/core'
 
-import { Cartesian2DCoordinate } from '@observerly/celestia'
+import type {
+  CartesianCoordinate
+} from '@observerly/polaris'
 
 /**
  * 
@@ -35,7 +37,7 @@ export const useDimensions = () => {
     y.value = screenHeight.value
   })
 
-  const dimensions = computed<Cartesian2DCoordinate>(() => {
+  const dimensions = computed<CartesianCoordinate>(() => {
     return {
       x: x.value * resolution.value,
       y: y.value * resolution.value

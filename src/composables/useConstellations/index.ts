@@ -1,15 +1,18 @@
 import { ref, watch, ComputedRef, Ref } from 'vue'
 
+import type {
+  CartesianCoordinate,
+  HorizontalCoordinate
+} from '@observerly/polaris'
+
 import {
   constellations,
   convertEquatorialToHorizontal,
   convertHorizontalToEquatorial,
-  getConstellation,
-  stereoProjectHorizontalToCartesian2DCoordinate,
-  stereoProjectHorizontalFromCartesian2DCoordinate,
-  Cartesian2DCoordinate,
-  HorizontalCoordinate
-} from '@observerly/celestia'
+  convertHorizontalToStereo,
+  convertStereoToHorizontal,
+  getConstellation
+} from '@observerly/polaris'
 
 import { drawLine } from '@/utils'
 
@@ -45,7 +48,7 @@ export interface UseConstellationOptions {
    * Dimenions (Width & Height) of the Projection Surface:
    * 
    */
-  dimensions: ComputedRef<Cartesian2DCoordinate>
+  dimensions: ComputedRef<CartesianCoordinate>
   /**
    * 
    * 
@@ -138,7 +141,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
     const pixelRatio = resolution.value
 
     if (showConstellations.value && !isDragging.value) {
-      let { alt, az } = stereoProjectHorizontalFromCartesian2DCoordinate(
+      let { alt, az } = convertStereoToHorizontal(
         {
           x: x.value * pixelRatio,
           y: y.value * pixelRatio
@@ -172,7 +175,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
       )
 
       if (currentConstellation) {
-        constellation.value = currentConstellation.constellation
+        constellation.value = currentConstellation.name
       }
     }
   })
@@ -240,7 +243,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
 
         lineTo.az -= azOffset.value
 
-        const moveTo2DCartiesian: Cartesian2DCoordinate = stereoProjectHorizontalToCartesian2DCoordinate(
+        const moveTo2DCartiesian: CartesianCoordinate = convertHorizontalToStereo(
           {
             alt: moveTo.alt,
             az: moveTo.az
@@ -249,7 +252,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
           height
         )
 
-        const lineTo2DCartiesian: Cartesian2DCoordinate = stereoProjectHorizontalToCartesian2DCoordinate(
+        const lineTo2DCartiesian: CartesianCoordinate = convertHorizontalToStereo(
           {
             alt: lineTo.alt,
             az: lineTo.az

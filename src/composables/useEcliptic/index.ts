@@ -3,13 +3,19 @@ import { computed, ref, ComputedRef, Ref } from 'vue'
 import { onKeyStroke } from '@vueuse/core'
 
 import {
-  convertEquatorialToHorizontal,
-  getEclipticCoordinates,
-  stereoProjectHorizontalToCartesian2DCoordinate,
-  Cartesian2DCoordinate,
   Cartesian2DHorizontalCoordinate,
-  EquatorialCoordinate
 } from '@observerly/celestia'
+
+import type {
+  CartesianCoordinate,
+  EquatorialCoordinate
+} from '@observerly/polaris'
+
+import {
+  convertEquatorialToHorizontal,
+  convertHorizontalToStereo,
+  getSolarEcliptic
+} from '@observerly/polaris'
 
 export interface UseEclipticOptions {
   /**
@@ -41,7 +47,7 @@ export interface UseEclipticOptions {
    * Dimenions (Width & Height) of the Projection Surface:
    * 
    */
-  dimensions: ComputedRef<Cartesian2DCoordinate>
+  dimensions: ComputedRef<CartesianCoordinate>
   /**
    * 
    * 
@@ -101,7 +107,7 @@ export const useEcliptic = (options: UseEclipticOptions) => {
   )
 
   const ecliptic = computed<Cartesian2DHorizontalCoordinate[]>(() => {
-    const eclipticCoordinates: EquatorialCoordinate[] = getEclipticCoordinates(datetime.value)
+    const ecliptic: EquatorialCoordinate[] = getSolarEcliptic(datetime.value)
 
     const width = dimensions.value.x
 
@@ -112,7 +118,7 @@ export const useEcliptic = (options: UseEclipticOptions) => {
     const lat = latitude.value
 
     // Loop over the ecliptic coordinates array:
-    const ecliptic: Cartesian2DHorizontalCoordinate[] = eclipticCoordinates.map(
+    return ecliptic.map(
       (coordinate: EquatorialCoordinate) => {
         let { alt, az } = convertEquatorialToHorizontal(
           {
@@ -130,7 +136,7 @@ export const useEcliptic = (options: UseEclipticOptions) => {
 
         az -= azOffset.value
 
-        const { x, y } = stereoProjectHorizontalToCartesian2DCoordinate(
+        const { x, y } = convertHorizontalToStereo(
           {
             alt: alt,
             az: az
@@ -148,8 +154,6 @@ export const useEcliptic = (options: UseEclipticOptions) => {
         }
       }
     )
-
-    return ecliptic
   })
 
   const drawEcliptic = (
