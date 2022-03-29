@@ -1,6 +1,6 @@
 import type {
-  Cartesian2DCoordinate
-} from '@observerly/celestia'
+  CartesianCoordinate
+} from '@observerly/polaris'
 
 /**
  * intersectDistance()
@@ -11,6 +11,6 @@ import type {
  * @param coordinate
  * @returns distance between position i and position j
  */
-export const intersectDistance = (i: Cartesian2DCoordinate, j: Cartesian2DCoordinate): number => {
+export const intersectDistance = (i: CartesianCoordinate, j: CartesianCoordinate): number => {
   return Math.sqrt((i.x - j.x) ** 2 + (i.y - j.y) ** 2)
 }

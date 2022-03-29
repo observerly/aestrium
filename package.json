@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@observerly/polaris": "^0.52.1",
-    "@observerly/useaestrium": "^0.11.3",
+    "@observerly/useaestrium": "^0.12.0",
     "@vueuse/core": "^7.4.1",
     "@vueuse/gesture": "^1.0.0",
     "vue": "^3.2.26"

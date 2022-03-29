@@ -1,4 +1,4 @@
-import { Cartesian2DCoordinate } from '@observerly/celestia'
+import { CartesianCoordinate } from '@observerly/polaris'
 
 /**
  * 
@@ -61,8 +61,8 @@ export const drawClosedPath = (
  */
 export const drawLine = (
   ctx: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null,
-  moveTo: Cartesian2DCoordinate,
-  lineTo: Cartesian2DCoordinate
+  moveTo: CartesianCoordinate,
+  lineTo: CartesianCoordinate
 ): void => {
   if (ctx) {
     ctx.beginPath()

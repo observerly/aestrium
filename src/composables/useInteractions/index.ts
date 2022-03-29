@@ -43,9 +43,9 @@ export const useInteractions = (options: UseInteractionsOptions) => {
 
   useDrag(
     ({ tap, dragging }): void => {
-      // Are we tapping the Celestia Sky Viewer frame?
+      // Are we tapping the Sky Viewer frame?
       isTapping.value = tap
-      // Are we dragging the Celestia Sky Viewer frame?
+      // Are we dragging the Sky Viewer frame?
       isDragging.value = dragging
     },
     {
