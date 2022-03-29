@@ -2,7 +2,7 @@
 
 Vue 3 component module written in modern Typescript (strongly typed Javascript).
 
-aestrium-vue utilises the celestia astrometric library: [@observerly/celestia](https://github.com/observerly/celestia)
+aestrium-vue utilises the polaris astrometric library: [@observerly/polaris](https://github.com/observerly/p[olaris]) by observerly.
 
 ## Installation
 

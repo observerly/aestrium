@@ -2,13 +2,10 @@ import { computed, ref, ComputedRef, Ref } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
-import {
-  Cartesian2DHorizontalCoordinate,
-} from '@observerly/celestia'
-
 import type {
   CartesianCoordinate,
-  EquatorialCoordinate
+  EquatorialCoordinate,
+  HorizontalCoordinate
 } from '@observerly/polaris'
 
 import {
@@ -16,6 +13,8 @@ import {
   convertHorizontalToStereo,
   getSolarEcliptic
 } from '@observerly/polaris'
+
+export type EclipticCoordinate = CartesianCoordinate & EquatorialCoordinate & HorizontalCoordinate
 
 export interface UseEclipticOptions {
   /**
@@ -106,7 +105,7 @@ export const useEcliptic = (options: UseEclipticOptions) => {
     }
   )
 
-  const ecliptic = computed<Cartesian2DHorizontalCoordinate[]>(() => {
+  const ecliptic = computed<EclipticCoordinate[]>(() => {
     const ecliptic: EquatorialCoordinate[] = getSolarEcliptic(datetime.value)
 
     const width = dimensions.value.x
@@ -163,7 +162,7 @@ export const useEcliptic = (options: UseEclipticOptions) => {
     if (ctx.value) {
       const precision = resolution.value
 
-      ecliptic.value.forEach((coordinate: Cartesian2DHorizontalCoordinate) => {
+      ecliptic.value.forEach((coordinate: EclipticCoordinate) => {
         const { x, y } = coordinate
 
         if (x >= 0 && y >= 0 && ctx.value) {
