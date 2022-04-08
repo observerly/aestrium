@@ -6,17 +6,17 @@ import { useDrag } from '@vueuse/gesture'
 
 export interface UseInteractionsOptions {
   /**
-   * 
+   *
    * HTML Element to target for user interactions
-   * 
+   *
    */
   element: HTMLElement | null
 }
 
 /**
- * 
+ *
  * reactive useInteractions()
- * 
+ *
  * @param options of type UseInteractionsOptions
  * @returns UseInteractionsReturn
  */

@@ -2,11 +2,7 @@ import { computed, onMounted, ComputedRef, Ref, ref } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
-import type {
-  Body,
-  CartesianCoordinate,
-  HorizontalCoordinate
-} from '@observerly/polaris'
+import type { Body, CartesianCoordinate, HorizontalCoordinate } from '@observerly/polaris'
 
 import {
   convertHorizontalToStereo,
@@ -22,78 +18,80 @@ const hasIAU = (star: Body): boolean => star.iau.length > 0
 
 export interface UseStarsOptions {
   /**
-   * 
+   *
    * Longitude coordinate {in degrees}
-   * 
+   *
    */
   longitude: ComputedRef<number>
   /**
-   * 
+   *
    * Latitude coordinate {in degrees}
-   * 
+   *
    */
   latitude: ComputedRef<number>
   /**
-   * 
+   *
    * Azimuthal Offset
-   * 
+   *
    */
   azOffset: Ref<number>
   /**
-   * 
+   *
    * Altitudinal Offset
-   * 
+   *
    */
   altOffset: Ref<number>
   /**
-   * 
+   *
    * Dimenions (Width & Height) of the Projection Surface:
-   * 
+   *
    */
   dimensions: ComputedRef<CartesianCoordinate>
   /**
-   * 
-   * 
+   *
+   *
    * Screen Resolution
-   * 
+   *
    */
   resolution: ComputedRef<number>
   /**
-   * 
+   *
    * Datetime
-   * 
+   *
    */
   datetime: Ref<Date>
   /**
-   * 
+   *
    * is the frame being dragged?
-   * 
+   *
    */
   isDragging: Ref<boolean>
   /**
-   * 
+   *
    * current { x } pointer position
-   * 
+   *
    */
   x: Ref<number>
   /**
-   * 
+   *
    * current { y } pointer position
-   * 
+   *
    */
   y: Ref<number>
 }
 
-export type StarObserved = Body & HorizontalCoordinate & CartesianCoordinate & {
-  angularDiameter: number
+export type StarObserved = Body &
+  HorizontalCoordinate &
+  CartesianCoordinate & {
+    angularDiameter: number
 
-  intersectDistance: number
-}
+    intersectDistance: number
+  }
 
 /**
- * 
+ *
  * fetchMajorStars()
- * 
+ *
  */
 export const fetchMajorStars = async () => {
   try {
@@ -106,9 +104,9 @@ export const fetchMajorStars = async () => {
 }
 
 /**
- * 
+ *
  * fetchMinorStars()
- * 
+ *
  */
 export const fetchMinorStars = async () => {
   try {
@@ -121,9 +119,9 @@ export const fetchMinorStars = async () => {
 }
 
 /**
- * 
+ *
  * reactive useMagnitude()
- * 
+ *
  */
 const useMagnitude = () => {
   // Magnitude Limit:
@@ -177,7 +175,7 @@ const useMagnitude = () => {
   }
 }
 
-export { useMagnitude  as useStarsMagnitude }
+export { useMagnitude as useStarsMagnitude }
 
 /**
  * Reactive useStars()
@@ -187,18 +185,8 @@ export { useMagnitude  as useStarsMagnitude }
  * @output
  */
 export const useStars = (options: UseStarsOptions) => {
-  const {
-    longitude,
-    latitude,
-    azOffset,
-    altOffset,
-    dimensions,
-    resolution,
-    datetime,
-    isDragging,
-    x,
-    y
-  } = options
+  const { longitude, latitude, azOffset, altOffset, dimensions, resolution, datetime, isDragging, x, y } =
+    options
 
   const majorStars = ref([])
 
@@ -233,8 +221,7 @@ export const useStars = (options: UseStarsOptions) => {
 
   const stars = computed<Body[]>(() => {
     return [...majorStars.value, ...minorStars.value, ...peripheralStars.value].filter(
-      (s: Body) =>
-        parseFloat(s.apparentMagnitude) <= limit.value
+      (s: Body) => parseFloat(s.apparentMagnitude) <= limit.value
     )
   })
 
@@ -254,7 +241,7 @@ export const useStars = (options: UseStarsOptions) => {
         },
         {
           longitude: longitude.value,
-          latitude: latitude.value,
+          latitude: latitude.value
         },
         datetime.value
       )
@@ -291,7 +278,7 @@ export const useStars = (options: UseStarsOptions) => {
         )
       }
     })
-      
+
     return s.filter(
       // Filter only the stars inside the bounding box:
       (s: StarObserved) => s.x >= 0 && s.x <= width && s.y >= 0 && s.y <= height

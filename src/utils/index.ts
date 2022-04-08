@@ -1,9 +1,3 @@
-export {
-  drawBody,
-  drawClosedPath,
-  drawLine
-} from './canvas'
+export { drawBody, drawClosedPath, drawLine } from './canvas'
 
-export {
-  intersectDistance
-} from './intersectDistance'
+export { intersectDistance } from './intersectDistance'

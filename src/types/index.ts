@@ -1,4 +1,1 @@
-export {
-  SkyViewerOptions,
-  SkyViewerPosition 
-} from './SkyViewer'
+export { SkyViewerOptions, SkyViewerPosition } from './SkyViewer'
