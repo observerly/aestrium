@@ -1,90 +1,78 @@
-import { computed, ComputedRef, ref, Ref  } from 'vue'
+import { computed, ComputedRef, ref, Ref } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
-import type {
-  CartesianCoordinate,
-  HorizontalCoordinate
-} from '@observerly/polaris'
+import type { CartesianCoordinate, HorizontalCoordinate } from '@observerly/polaris'
 
-import{
-  convertHorizontalToStereo
-} from '@observerly/polaris'
+import { convertHorizontalToStereo } from '@observerly/polaris'
 
 export interface Cardinal {
   /**
-   * 
+   *
    * Observer's relative local azimuth.
-   * 
+   *
    */
-  // 
+  //
   az: number
   /**
-   * 
+   *
    * Canvas X Position
-   * 
+   *
    */
   x: number
   /**
-   * 
+   *
    * Canvas Y Position
-   * 
+   *
    */
-  // 
+  //
   y: number
   /**
-   * 
+   *
    * Represents the "heading" to display.
-   * 
-   * 
+   *
+   *
    */
   display: 'N' | 'E' | 'S' | 'W' | 'NE' | 'NW' | 'SE' | 'SW'
 }
 
 export interface UseCardinalsOptions {
   /**
-   * 
+   *
    * Azimuthal Offset
-   * 
+   *
    */
   azOffset: Ref<number>
   /**
-   * 
+   *
    * Altitudinal Offset
-   * 
+   *
    */
   altOffset: Ref<number>
   /**
-   * 
+   *
    * Dimenions (Width & Height) of the Projection Surface:
-   * 
+   *
    */
   dimensions: ComputedRef<CartesianCoordinate>
   /**
-   * 
-   * 
+   *
+   *
    * Screen Resolution
-   * 
+   *
    */
   resolution: ComputedRef<number>
 }
 
 /**
- * 
+ *
  * reactive useCardinals()
- * 
+ *
  * @param options of type UseCardinalsOptions
- * @returns 
+ * @returns
  */
-export const useCardinals = (
-  options: UseCardinalsOptions
-) => {
-  const {
-    azOffset,
-    altOffset,
-    dimensions,
-    resolution
-  } = options
+export const useCardinals = (options: UseCardinalsOptions) => {
+  const { azOffset, altOffset, dimensions, resolution } = options
 
   const showCardinals = ref(true)
 
@@ -150,13 +138,13 @@ export const useCardinals = (
   // Draw Cardinal Directions from their azimuthal definitions:
   const drawCardinals = (
     ctx: Ref<OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null>,
-    fillStyle: string,
+    fillStyle: string
   ): void => {
     if (ctx.value) {
       const fontSize = resolution.value * 12
       ctx.value.fillStyle = fillStyle
       ctx.value.font = `${fontSize}px "system-ui"`
-      ctx.value.textAlign = 'center'      
+      ctx.value.textAlign = 'center'
     }
 
     cardinals.value.forEach(cardinal => {

@@ -2,92 +2,83 @@ import { computed, ref, ComputedRef, Ref } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
-import {
-  getSun,
-  convertEquatorialToHorizontal,
-  convertHorizontalToStereo
-} from '@observerly/polaris'
+import { getSun, convertEquatorialToHorizontal, convertHorizontalToStereo } from '@observerly/polaris'
 
-import type {
-  CartesianCoordinate,
-  Sun
-} from '@observerly/polaris'
+import type { CartesianCoordinate, Sun } from '@observerly/polaris'
 
 export type SunObserved = Sun & CartesianCoordinate
 
 export interface UseSunOptions {
   /**
-   * 
+   *
    * Longitude coordinate {in degrees}
-   * 
+   *
    */
   longitude: ComputedRef<number>
   /**
-   * 
+   *
    * Latitude coordinate {in degrees}
-   * 
+   *
    */
   latitude: ComputedRef<number>
   /**
-   * 
+   *
    * Azimuthal Offset
-   * 
+   *
    */
   azOffset: Ref<number>
   /**
-   * 
+   *
    * Altitudinal Offset
-   * 
+   *
    */
   altOffset: Ref<number>
   /**
-   * 
+   *
    * Dimenions (Width & Height) of the Projection Surface:
-   * 
+   *
    */
   dimensions: ComputedRef<CartesianCoordinate>
   /**
-   * 
-   * 
+   *
+   *
    * Screen Resolution
-   * 
+   *
    */
   resolution: ComputedRef<number>
   /**
-   * 
+   *
    * Datetime
-   * 
+   *
    */
   datetime: Ref<Date>
   /**
-   * 
+   *
    * is the frame being dragged?
-   * 
+   *
    */
   isDragging: Ref<boolean>
   /**
-   * 
+   *
    * current { x } pointer position
-   * 
+   *
    */
   x: Ref<number>
   /**
-   * 
+   *
    * current { y } pointer position
-   * 
+   *
    */
   y: Ref<number>
   /**
-   * 
+   *
    * show constellations boolean
-   * 
+   *
    */
   show: boolean
 }
 
-export const useSun = (
-  options: UseSunOptions
-) => {
+export const useSun = (options: UseSunOptions) => {
   const {
     longitude,
     latitude,
@@ -125,7 +116,7 @@ export const useSun = (
     const width = dimensions.value.x
 
     const height = dimensions.value.y
-    
+
     const { ra, dec } = getSun(datetime.value)
 
     let { alt, az } = convertEquatorialToHorizontal(
@@ -135,7 +126,7 @@ export const useSun = (
       },
       {
         longitude: longitude.value,
-        latitude: latitude.value,
+        latitude: latitude.value
       },
       datetime.value
     )

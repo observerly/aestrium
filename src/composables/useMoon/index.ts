@@ -2,16 +2,9 @@ import { computed, ref, ComputedRef, Ref } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
-import {
-  convertEquatorialToHorizontal,
-  convertHorizontalToStereo,
-  getMoon
-} from '@observerly/polaris'
+import { convertEquatorialToHorizontal, convertHorizontalToStereo, getMoon } from '@observerly/polaris'
 
-import type {
-  CartesianCoordinate,
-  Moon
-} from '@observerly/polaris'
+import type { CartesianCoordinate, Moon } from '@observerly/polaris'
 
 import { drawBody } from '@/utils'
 
@@ -19,74 +12,73 @@ export type MoonObserved = Moon & CartesianCoordinate
 
 export interface UseMoonOptions {
   /**
-   * 
+   *
    * Longitude coordinate {in degrees}
-   * 
+   *
    */
   longitude: ComputedRef<number>
   /**
-   * 
+   *
    * Latitude coordinate {in degrees}
-   * 
+   *
    */
   latitude: ComputedRef<number>
   /**
-   * 
+   *
    * Azimuthal Offset
-   * 
+   *
    */
   azOffset: Ref<number>
   /**
-   * 
+   *
    * Altitudinal Offset
-   * 
+   *
    */
   altOffset: Ref<number>
   /**
-   * 
+   *
    * Dimenions (Width & Height) of the Projection Surface:
-   * 
+   *
    */
   dimensions: ComputedRef<CartesianCoordinate>
   /**
-   * 
-   * 
+   *
+   *
    * Screen Resolution
-   * 
+   *
    */
   resolution: ComputedRef<number>
   /**
-   * 
+   *
    * Datetime
-   * 
+   *
    */
   datetime: Ref<Date>
   /**
-   * 
+   *
    * is the frame being dragged?
-   * 
+   *
    */
   isDragging: Ref<boolean>
   /**
-   * 
+   *
    * current { x } pointer position
-   * 
+   *
    */
   x: Ref<number>
   /**
-   * 
+   *
    * current { y } pointer position
-   * 
+   *
    */
   y: Ref<number>
   /**
-   * 
+   *
    * show the moon boolean
-   * 
+   *
    */
   show: boolean
 }
-
 
 /**
  * Reactive useMoon()
@@ -135,7 +127,9 @@ export const useMoon = (options: UseMoonOptions) => {
 
     const height = dimensions.value.y
 
-    const { ra, dec, illumination, inclination, obliquity, phase, siderealMonth, synodicMonth } = getMoon(datetime.value)
+    const { ra, dec, illumination, inclination, obliquity, phase, siderealMonth, synodicMonth } = getMoon(
+      datetime.value
+    )
 
     let { alt, az } = convertEquatorialToHorizontal(
       {
@@ -144,7 +138,7 @@ export const useMoon = (options: UseMoonOptions) => {
       },
       {
         longitude: longitude.value,
-        latitude: latitude.value,
+        latitude: latitude.value
       },
       datetime.value
     )
@@ -179,15 +173,13 @@ export const useMoon = (options: UseMoonOptions) => {
   })
 
   // Draw the Moon to the Canvas:
-  const drawMoon = (
-    ctx: Ref<OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null>
-  ): void => {
+  const drawMoon = (ctx: Ref<OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null>): void => {
     const { x, y } = moon.value
 
     const precision = resolution.value
 
     // Calculate the Apparent Angular Diameter as observed from our observed location:
-    const radius = 10 * 0.6880 * precision
+    const radius = 10 * 0.688 * precision
 
     // Draw the Moon HTMLImageElement on the canvas.ctx:
     if (x >= 0 && y >= 0 && ctx.value) {
