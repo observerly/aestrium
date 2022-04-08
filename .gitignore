@@ -130,3 +130,6 @@ src/**/*.js
 
 # e2e Cypress Tests:
 tests/e2e/videos/*
+
+# Ignore those pesky Mac generated DS_Store files!
+.DS_Store
