@@ -1,12 +1,6 @@
-export {
-  useAdjustedScreen
-} from '@/composables/useAdjustedScreen'
+export { useAdjustedScreen } from '@/composables/useAdjustedScreen'
 
-export {
-  useCanvas,
-  UseCanvasReturn,
-  UseCanvasProps
-} from '@/composables/useCanvas'
+export { useCanvas, UseCanvasReturn, UseCanvasProps } from '@/composables/useCanvas'
 
 export {
   useCardinals,
@@ -22,17 +16,13 @@ export {
   UseConstellationsProps
 } from '@/composables/useConstellations'
 
-export {
-  useDimensions,
-  UseDimensionsReturn,
-  UseDimensionsProps
-} from '@/composables/useDimensions'
+export { useDimensions, UseDimensionsReturn, UseDimensionsProps } from '@/composables/useDimensions'
 
 export {
   useEcliptic,
   UseEclipticOptions,
   UseEclipticReturn,
-  UseEclipticProps,
+  UseEclipticProps
 } from '@/composables/useEcliptic'
 
 export {
@@ -42,12 +32,7 @@ export {
   UseInteractionsProps
 } from '@/composables/useInteractions'
 
-export {
-  useMoon,
-  UseMoonOptions,
-  UseMoonReturn,
-  UseMoonProps
-} from '@/composables/useMoon'
+export { useMoon, UseMoonOptions, UseMoonReturn, UseMoonProps } from '@/composables/useMoon'
 
 export {
   useStars,
@@ -56,12 +41,7 @@ export {
   UseStarsProps,
   useStarsMagnitude,
   fetchMajorStars,
-  fetchMinorStars,
+  fetchMinorStars
 } from '@/composables/useStars'
 
-export {
-  useSun,
-  UseSunOptions,
-  UseSunReturn,
-  UseSunProps
-} from '@/composables/useSun'
+export { useSun, UseSunOptions, UseSunReturn, UseSunProps } from '@/composables/useSun'

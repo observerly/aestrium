@@ -1,12 +1,10 @@
-import type {
-  CartesianCoordinate
-} from '@observerly/polaris'
+import type { CartesianCoordinate } from '@observerly/polaris'
 
 /**
  * intersectDistance()
- * 
+ *
  * the distance between coordinate { x_1, y_1 } and coordinate { x_n, y_n }
- * 
+ *
  * @param coordinate
  * @param coordinate
  * @returns distance between position i and position j

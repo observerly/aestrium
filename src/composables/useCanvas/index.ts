@@ -4,45 +4,43 @@ import { throttledWatch } from '@vueuse/core'
 
 import { useDimensions } from '@/composables'
 
-import type {
-  CartesianCoordinate
-} from '@observerly/polaris'
+import type { CartesianCoordinate } from '@observerly/polaris'
 
 export type UseCanvasReturn = {
   /**
-   * 
+   *
    * reactive Canvas HTML Element (template $ref)
-   * 
+   *
    */
   canvas: Ref<HTMLCanvasElement | null>
   /**
-   * 
+   *
    * reactive optimised Offscreem Canvas
-   * 
+   *
    */
   canvasOptimised: Ref<HTMLCanvasElement | OffscreenCanvas | null>
   /**
-   * 
+   *
    * Canvas Rendering Context 2D
-   * 
+   *
    */
   ctx: Ref<OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null>
   /**
-   * 
+   *
    * reactive Root Parent HTML Element (template $ref)
-   * 
+   *
    */
   root: Ref<HTMLElement | null>
   /**
-   * 
+   *
    * Our predetermined canvas dimensions (width, height)
-   * 
+   *
    */
   dimensions: ComputedRef<CartesianCoordinate>
   /**
-   * 
+   *
    * The resolution of our Canvas
-   * 
+   *
    */
   resolution: ComputedRef<number>
 }
@@ -64,7 +62,8 @@ export const useCanvas = (): UseCanvasReturn => {
   onMounted(() => {
     // Obtain a pseudo offscreen canvas, from either canvas.value.transferControlToOffscreen() or if
     // unsupported the default canavs. This could be either type of Ref<HTMLCanvasElement | OffscreenCanvas >
-    canvasOptimised.value = 'OffscreenCanvas' in window && canvas.value ? canvas.value.transferControlToOffscreen() : canvas.value
+    canvasOptimised.value =
+      'OffscreenCanvas' in window && canvas.value ? canvas.value.transferControlToOffscreen() : canvas.value
 
     if (canvasOptimised.value) {
       // Canvas is expected to have a style.width and style.height property:

@@ -1,9 +1,6 @@
 import { ref, watch, ComputedRef, Ref } from 'vue'
 
-import type {
-  CartesianCoordinate,
-  HorizontalCoordinate
-} from '@observerly/polaris'
+import type { CartesianCoordinate, HorizontalCoordinate } from '@observerly/polaris'
 
 import {
   constellations,
@@ -20,70 +17,70 @@ import { onKeyStroke } from '@vueuse/core'
 
 export interface UseConstellationOptions {
   /**
-   * 
+   *
    * Longitude coordinate {in degrees}
-   * 
+   *
    */
   longitude: ComputedRef<number>
   /**
-   * 
+   *
    * Latitude coordinate {in degrees}
-   * 
+   *
    */
   latitude: ComputedRef<number>
   /**
-   * 
+   *
    * Azimuthal Offset
-   * 
+   *
    */
   azOffset: Ref<number>
   /**
-   * 
+   *
    * Altitudinal Offset
-   * 
+   *
    */
   altOffset: Ref<number>
   /**
-   * 
+   *
    * Dimenions (Width & Height) of the Projection Surface:
-   * 
+   *
    */
   dimensions: ComputedRef<CartesianCoordinate>
   /**
-   * 
-   * 
+   *
+   *
    * Screen Resolution
-   * 
+   *
    */
   resolution: ComputedRef<number>
   /**
-   * 
+   *
    * Datetime
-   * 
+   *
    */
   datetime: Ref<Date>
   /**
-   * 
+   *
    * is the frame being dragged?
-   * 
+   *
    */
   isDragging: Ref<boolean>
   /**
-   * 
+   *
    * current { x } pointer position
-   * 
+   *
    */
   x: Ref<number>
   /**
-   * 
+   *
    * current { y } pointer position
-   * 
+   *
    */
   y: Ref<number>
   /**
-   * 
+   *
    * show constellations boolean
-   * 
+   *
    */
   show: boolean
 }
@@ -161,7 +158,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
         },
         {
           longitude: longitude.value,
-          latitude: latitude.value,
+          latitude: latitude.value
         },
         datetime.value
       )
@@ -208,7 +205,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
           ctx.value.setLineDash([2, 5])
         }
       }
-      
+
       // For brevity, an aster is the line joining two points in a constellation:
       constellation.aster.forEach(aster => {
         const moveTo: HorizontalCoordinate = convertEquatorialToHorizontal(
@@ -218,7 +215,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
           },
           {
             longitude: longitude.value,
-            latitude: latitude.value,
+            latitude: latitude.value
           },
           datetime.value
         )
@@ -230,7 +227,7 @@ export const useConstellations = (options: UseConstellationOptions) => {
           },
           {
             longitude: longitude.value,
-            latitude: latitude.value,
+            latitude: latitude.value
           },
           datetime.value
         )

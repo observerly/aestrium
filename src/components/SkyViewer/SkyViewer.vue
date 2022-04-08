@@ -21,30 +21,15 @@
 </template>
 
 <script lang="ts">
-import { 
-  computed, 
-  defineComponent,
-  onMounted, 
-  PropType,
-  toRef,
-  watch 
-} from 'vue'
+import { computed, defineComponent, onMounted, PropType, toRef, watch } from 'vue'
 
 import { useIntervalFn } from '@vueuse/core'
 
-import { 
-  SkyViewerOptions, 
-  SkyViewerPosition 
-} from '@/types'
+import { SkyViewerOptions, SkyViewerPosition } from '@/types'
 
-import type {
-  UseInternalClockReturn,
-  UseObserverReturn
-} from '@observerly/useaestrium'
+import type { UseInternalClockReturn, UseObserverReturn } from '@observerly/useaestrium'
 
-import {
-  useEquatorialCoordinate
-} from '@observerly/useaestrium'
+import { useEquatorialCoordinate } from '@observerly/useaestrium'
 
 import {
   useCardinals,
@@ -54,7 +39,7 @@ import {
   useMoon,
   useStars,
   useSun,
-  useInteractions,
+  useInteractions
 } from '@/composables'
 
 export default defineComponent({
@@ -74,7 +59,7 @@ export default defineComponent({
     }
   },
   emits: {
-    'on:active-position-change': (v: SkyViewerPosition , i: { isDragging: boolean }): boolean => {
+    'on:active-position-change': (v: SkyViewerPosition, i: { isDragging: boolean }): boolean => {
       return (
         !isNaN(v.top) &&
         !isNaN(v.right) &&
@@ -100,7 +85,12 @@ export default defineComponent({
     watch(x, (prevX, newX) => {
       isDragging.value = pressed.value
 
-      if (pressed.value && isDragging.value && !isTapping.value && !props.observer.usingDeviceOrientation?.value) {
+      if (
+        pressed.value &&
+        isDragging.value &&
+        !isTapping.value &&
+        !props.observer.usingDeviceOrientation?.value
+      ) {
         if (prevX - newX < dimensions.value.x / 3 && prevX - newX > -dimensions.value.x / 3) {
           props.observer.setHorizontalOffset({
             alt: 0,
@@ -111,11 +101,7 @@ export default defineComponent({
     })
 
     // Setup the Stars:
-    const {
-      star,
-      stars,
-      drawStars
-    } = useStars({
+    const { star, stars, drawStars } = useStars({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
       azOffset: observer.value.azOffset,
@@ -129,11 +115,11 @@ export default defineComponent({
     })
 
     // Setup the Constellations:
-    const { 
+    const {
       constellation,
       constellations,
-      drawConstellations, 
-      show: showConstellations 
+      drawConstellations,
+      show: showConstellations
     } = useConstellations({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
@@ -149,10 +135,10 @@ export default defineComponent({
     })
 
     // Setup the Sun:
-    const { 
+    const {
       sun,
-      drawSun, 
-      show: showSun 
+      drawSun,
+      show: showSun
     } = useSun({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
@@ -187,10 +173,7 @@ export default defineComponent({
     })
 
     // Setup the Ecliptic:
-    const { 
-      drawEcliptic, 
-      show: showEcliptic 
-    } = useEcliptic({
+    const { drawEcliptic, show: showEcliptic } = useEcliptic({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
       azOffset: observer.value.azOffset,
@@ -202,17 +185,20 @@ export default defineComponent({
     })
 
     // Setup the Cardinals:
-    const { 
-      drawCardinals, 
-      show: showCardinals 
-    } = useCardinals({
+    const { drawCardinals, show: showCardinals } = useCardinals({
       azOffset: observer.value.azOffset,
       altOffset: observer.value.altOffset,
       dimensions,
       resolution
     })
 
-    const { x: X, y: Y, alt, az, setEquatorialCoordinate } = useEquatorialCoordinate({
+    const {
+      x: X,
+      y: Y,
+      alt,
+      az,
+      setEquatorialCoordinate
+    } = useEquatorialCoordinate({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
       azOffset: observer.value.azOffset,
@@ -224,15 +210,15 @@ export default defineComponent({
 
     watch(pressed, () => {
       if (pressed.value && star.value) {
-        setEquatorialCoordinate({ 
-          ra: parseInt(star.value.ra), 
-          dec: parseInt(star.value.dec) 
+        setEquatorialCoordinate({
+          ra: parseInt(star.value.ra),
+          dec: parseInt(star.value.dec)
         })
       }
 
       if (pressed.value && !star.value) {
-        setEquatorialCoordinate({ 
-          ra: Infinity, 
+        setEquatorialCoordinate({
+          ra: Infinity,
           dec: Infinity
         })
       }
@@ -244,26 +230,26 @@ export default defineComponent({
       const height = dimensions.value.y - 100
 
       const isReadytoEmit = !!(
-        X.value && 
-        X.value >= 100 && 
-        X.value <= width && 
-        Y.value && 
-        Y.value >= 100 && 
+        X.value &&
+        X.value >= 100 &&
+        X.value <= width &&
+        Y.value &&
+        Y.value >= 100 &&
         Y.value <= height
       )
 
       const precision = resolution.value - 9
 
       emit(
-        'on:active-position-change', 
+        'on:active-position-change',
         {
           bottom: 0,
           left: isReadytoEmit ? X.value / precision : -9999,
           right: 0,
           top: isReadytoEmit ? Y.value / precision : -9999
-        }, 
-        { 
-          isDragging: isDragging.value 
+        },
+        {
+          isDragging: isDragging.value
         }
       )
     })
@@ -276,7 +262,12 @@ export default defineComponent({
           props.options.gradient.forEach(gradient => gd.addColorStop(gradient.stop, gradient.hex))
 
           ctx.value.fillStyle = gd
-          ctx.value.fillRect(0, 0, dimensions.value.x * resolution.value, dimensions.value.y * resolution.value)
+          ctx.value.fillRect(
+            0,
+            0,
+            dimensions.value.x * resolution.value,
+            dimensions.value.y * resolution.value
+          )
 
           drawStars(ctx)
 

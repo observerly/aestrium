@@ -12,10 +12,10 @@ export default defineConfig({
   plugins: [
     // https://github.com/antfu/vite-plugin-windicss
     WindiCSS({
-      safelist: '',
+      safelist: ''
     }),
     typescript({
-        tsconfig: './tsconfig.json'
+      tsconfig: './tsconfig.json'
     }),
     vue()
   ],
@@ -28,4 +28,3 @@ export default defineConfig({
     ]
   }
 })
-

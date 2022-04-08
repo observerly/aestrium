@@ -2,11 +2,7 @@ import { computed, ref, ComputedRef, Ref } from 'vue'
 
 import { onKeyStroke } from '@vueuse/core'
 
-import type {
-  CartesianCoordinate,
-  EquatorialCoordinate,
-  HorizontalCoordinate
-} from '@observerly/polaris'
+import type { CartesianCoordinate, EquatorialCoordinate, HorizontalCoordinate } from '@observerly/polaris'
 
 import {
   convertEquatorialToHorizontal,
@@ -18,52 +14,52 @@ export type EclipticCoordinate = CartesianCoordinate & EquatorialCoordinate & Ho
 
 export interface UseEclipticOptions {
   /**
-   * 
+   *
    * Longitude coordinate {in degrees}
-   * 
+   *
    */
   longitude: ComputedRef<number>
   /**
-   * 
+   *
    * Latitude coordinate {in degrees}
-   * 
+   *
    */
   latitude: ComputedRef<number>
   /**
-   * 
+   *
    * Azimuthal Offset
-   * 
+   *
    */
   azOffset: Ref<number>
   /**
-   * 
+   *
    * Altitudinal Offset
-   * 
+   *
    */
   altOffset: Ref<number>
   /**
-   * 
+   *
    * Dimenions (Width & Height) of the Projection Surface:
-   * 
+   *
    */
   dimensions: ComputedRef<CartesianCoordinate>
   /**
-   * 
-   * 
+   *
+   *
    * Screen Resolution
-   * 
+   *
    */
   resolution: ComputedRef<number>
   /**
-   * 
+   *
    * Datetime
-   * 
+   *
    */
   datetime: Ref<Date>
   /**
-   * 
+   *
    * show the ecliptic boolean
-   * 
+   *
    */
   show: boolean
 }
@@ -76,16 +72,7 @@ export interface UseEclipticOptions {
  * @output
  */
 export const useEcliptic = (options: UseEclipticOptions) => {
-  const {
-    longitude,
-    latitude,
-    azOffset,
-    altOffset,
-    dimensions,
-    resolution,
-    datetime,
-    show
-  } = options
+  const { longitude, latitude, azOffset, altOffset, dimensions, resolution, datetime, show } = options
 
   // Show the Sun:
   const showEcliptic = ref<boolean>(show)
@@ -117,42 +104,40 @@ export const useEcliptic = (options: UseEclipticOptions) => {
     const lat = latitude.value
 
     // Loop over the ecliptic coordinates array:
-    return ecliptic.map(
-      (coordinate: EquatorialCoordinate) => {
-        let { alt, az } = convertEquatorialToHorizontal(
-          {
-            ra: coordinate.ra,
-            dec: coordinate.dec
-          },
-          {
-            longitude: long,
-            latitude: lat
-          },
-          datetime.value
-        )
+    return ecliptic.map((coordinate: EquatorialCoordinate) => {
+      let { alt, az } = convertEquatorialToHorizontal(
+        {
+          ra: coordinate.ra,
+          dec: coordinate.dec
+        },
+        {
+          longitude: long,
+          latitude: lat
+        },
+        datetime.value
+      )
 
-        alt -= altOffset.value
+      alt -= altOffset.value
 
-        az -= azOffset.value
+      az -= azOffset.value
 
-        const { x, y } = convertHorizontalToStereo(
-          {
-            alt: alt,
-            az: az
-          },
-          width,
-          height
-        )
-
-        return {
-          ...coordinate,
+      const { x, y } = convertHorizontalToStereo(
+        {
           alt: alt,
-          az: az,
-          x: x,
-          y: y
-        }
+          az: az
+        },
+        width,
+        height
+      )
+
+      return {
+        ...coordinate,
+        alt: alt,
+        az: az,
+        x: x,
+        y: y
       }
-    )
+    })
   })
 
   const drawEcliptic = (

@@ -2,19 +2,17 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 import { useDevicePixelRatio, useResizeObserver, useWindowSize } from '@vueuse/core'
 
-import type {
-  CartesianCoordinate
-} from '@observerly/polaris'
+import type { CartesianCoordinate } from '@observerly/polaris'
 
 /**
- * 
+ *
  * reactive useDimensions()
- * 
+ *
  */
 export const useDimensions = () => {
   // Obtain the Device Pixel Ratio:
   const { pixelRatio } = useDevicePixelRatio()
-  
+
   // This is the HTMLElement root element as a ref:
   const root = ref<HTMLElement | null>(null)
 

@@ -3,9 +3,9 @@ import { useWindowSize } from '@vueuse/core'
 import { onMounted, onUnmounted, watch } from 'vue'
 
 /**
- * 
+ *
  * reactive useAdjustedScreen()
- * 
+ *
  */
 export const useAdjustedScreen = (): void => {
   const { height } = useWindowSize()

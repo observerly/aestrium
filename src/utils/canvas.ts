@@ -1,15 +1,15 @@
 import { CartesianCoordinate } from '@observerly/polaris'
 
 /**
- * 
+ *
  * drawBody()
- * 
- * @param ctx 
- * @param x 
- * @param y 
- * @param radius 
- * @param fillStyle 
- * @param scaling 
+ *
+ * @param ctx
+ * @param x
+ * @param y
+ * @param radius
+ * @param fillStyle
+ * @param scaling
  */
 export const drawBody = (
   ctx: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null,
@@ -28,13 +28,13 @@ export const drawBody = (
 }
 
 /**
- * 
+ *
  * drawClosedPath()
- * 
- * @param ctx 
- * @param path 
- * @param lineWidth 
- * @param strokeStyle 
+ *
+ * @param ctx
+ * @param path
+ * @param lineWidth
+ * @param strokeStyle
  */
 export const drawClosedPath = (
   ctx: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null,
@@ -52,12 +52,12 @@ export const drawClosedPath = (
 }
 
 /**
- * 
+ *
  * drawLine()
- * 
- * @param ctx 
- * @param moveTo 
- * @param lineTo 
+ *
+ * @param ctx
+ * @param moveTo
+ * @param lineTo
  */
 export const drawLine = (
   ctx: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null,
