@@ -52,7 +52,7 @@ jobs:
           registry: 'https://npm.pkg.github.com'
           token: ${{ secrets.GITHUB_TOKEN }}
           check-version: true
-      
+
       - if: steps.publish.outputs.type != 'none'
         run: |
           echo "@observerly/aestrium package version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }}"

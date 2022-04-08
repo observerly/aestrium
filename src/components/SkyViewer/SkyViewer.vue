@@ -92,16 +92,18 @@ export default defineComponent({
         !props.observer.usingDeviceOrientation?.value
       ) {
         if (prevX - newX < dimensions.value.x / 3 && prevX - newX > -dimensions.value.x / 3) {
+          const az = (props.observer.azOffset.value + (newX - prevX) / 6) % 360
+
           props.observer.setHorizontalOffset({
             alt: 0,
-            az: (props.observer.azOffset.value += (newX - prevX) / 6) % 360
+            az: az
           })
         }
       }
     })
 
     // Setup the Stars:
-    const { star, stars, drawStars } = useStars({
+    const { star, drawStars } = useStars({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
       azOffset: observer.value.azOffset,
@@ -115,12 +117,7 @@ export default defineComponent({
     })
 
     // Setup the Constellations:
-    const {
-      constellation,
-      constellations,
-      drawConstellations,
-      show: showConstellations
-    } = useConstellations({
+    const { drawConstellations, show: showConstellations } = useConstellations({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
       azOffset: observer.value.azOffset,
@@ -135,11 +132,7 @@ export default defineComponent({
     })
 
     // Setup the Sun:
-    const {
-      sun,
-      drawSun,
-      show: showSun
-    } = useSun({
+    const { drawSun, show: showSun } = useSun({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
       azOffset: observer.value.azOffset,
@@ -154,11 +147,7 @@ export default defineComponent({
     })
 
     // Setup the Moon:
-    const {
-      moon,
-      drawMoon,
-      show: showMoon
-    } = useMoon({
+    const { drawMoon, show: showMoon } = useMoon({
       longitude: observer.value.longitude,
       latitude: observer.value.latitude,
       azOffset: observer.value.azOffset,
@@ -195,8 +184,6 @@ export default defineComponent({
     const {
       x: X,
       y: Y,
-      alt,
-      az,
       setEquatorialCoordinate
     } = useEquatorialCoordinate({
       longitude: observer.value.longitude,

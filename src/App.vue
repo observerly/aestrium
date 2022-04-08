@@ -1,35 +1,19 @@
 <template>
   <div class="h-screen-adjust max-h-screen-adjust w-screen block relative overflow-hidden">
-    <SkyViewer
-      ref="skyViewer"
-      role="presentation"
-      :clock="clock"
-      :observer="observer"
-      :options="options"
-      @on:active-position-change="onActivePositionChange"
-    />
+    <SkyViewer ref="skyViewer" role="presentation" :clock="clock" :observer="observer" :options="options" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import {
-  SkyViewer
-} from '@/components'
+import { SkyViewer } from '@/components'
 
-import {
-  useAdjustedScreen
-} from '@/composables'
+import { useAdjustedScreen } from '@/composables'
 
-import {
-  useInternalClock,
-  useObserver
-} from '@observerly/useaestrium'
+import { useInternalClock, useObserver } from '@observerly/useaestrium'
 
-import { 
-  SkyViewerPosition
-} from '@/types'
+// import { SkyViewerPosition } from '@/types'
 
 const options = {
   live: true,
@@ -48,7 +32,7 @@ const options = {
       hex: '#3730A3',
       stop: 1.0
     }
-  ],
+  ]
 }
 
 export default defineComponent({
@@ -69,15 +53,15 @@ export default defineComponent({
       isLive: true
     })
 
-    const onActivePositionChange = (v: SkyViewerPosition, i: { isDragging: boolean }) => {
-      // active-position-change event emitted:
-    }
+    // const onActivePositionChange = (v: SkyViewerPosition, i: { isDragging: boolean }) => {
+    //   // active-position-change event emitted:
+    // }
 
     useAdjustedScreen()
 
     return {
       clock,
-      onActivePositionChange,
+      // onActivePositionChange,
       options,
       observer
     }
