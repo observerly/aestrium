@@ -1,0 +1,5 @@
+{
+  "baseUrl": "http://localhost:8099/",
+  "testFiles": "**/*.feature",
+  "ignoreTestFiles": "*.ts"
+}

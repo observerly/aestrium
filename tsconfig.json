@@ -62,7 +62,8 @@
       ]
     },                                              /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     "types": [
-      "@types/offscreencanvas"
+      "@types/offscreencanvas",
+      "cypress",
     ],                                              /* Type declaration files to be included in compilation. */                                              
     // "rootDirs": [],                              /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                             /* List of folders to include type definitions from. */
