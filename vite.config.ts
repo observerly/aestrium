@@ -9,6 +9,10 @@ const path = require('path')
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    host: true,
+    port: 8099
+  },
   plugins: [
     // https://github.com/antfu/vite-plugin-windicss
     WindiCSS({
