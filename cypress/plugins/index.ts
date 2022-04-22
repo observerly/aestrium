@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 const path = require('path')
-const { startDevServer } = require('@cypress/vite-dev-server')
 const browserify = require('@cypress/browserify-preprocessor')
 const cucumber = require('cypress-cucumber-preprocessor').default
 
