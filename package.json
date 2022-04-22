@@ -33,7 +33,7 @@
     "cy:info": "cypress info",
     "cy:version": "cypress version",
     "cy:cache:list": "cypress cache list",
-    "cy:run": "cypress run -q",
+    "cy:run": "npm run dev & wait-on http://localhost:8099 & cypress run -q",
     "cy:open": "cypress open"
   },
   "dependencies": {
