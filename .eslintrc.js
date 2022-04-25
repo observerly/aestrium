@@ -4,15 +4,13 @@ module.exports = {
     node: true
   },
   extends: [
-    'plugin:vue/vue3-essential',
     'eslint:recommended',
-    'plugin:cypress/recommended',
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier'
+    'plugin:vue/vue3-recommended',
+    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-strongly-recommended',
+    'plugin:cypress/recommended'
   ],
-  parserOptions: {
-    ecmaVersion: 2020
-  },
   plugins: ['cypress'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
