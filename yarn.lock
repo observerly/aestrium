@@ -1129,11 +1129,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
-"@observerly/polaris@^0.52.1":
-  "integrity" "sha512-e62MHVgwiHtBlhkgHmhHcB7/wV4RTX297hVASY4oswkPx8+y1P0dq6tyIqGn08zRSeBSmL6EhUteIsaWEU2Dsw=="
-  "resolved" "https://npm.pkg.github.com/download/@observerly/polaris/0.52.1/2bfc7be2b992b8823a1e63774e30218bd0615f96afead02d76475b33b3c9ead3"
-  "version" "0.52.1"
-
 "@observerly/polaris@^0.53.0":
   "integrity" "sha512-QvtQ1O0XaoqciDvb4pGMDl2FPoF7SAJZ55Cm7n94RsF96HNRbxXsPlqyHnqKppHF96UrlDOhRITpMnCjbZxCVw=="
   "resolved" "https://npm.pkg.github.com/download/@observerly/polaris/0.53.0/7bfff59d87d51cfe2a229942b8d3b756831feede29f252d89d3eb69b9eb8f5a9"
