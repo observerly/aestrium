@@ -1,9 +1,12 @@
 <template>
-  <div ref="root" class="h-full w-full bg-gray-800 overflow-hidden select-none z-10 relative">
+  <div
+    ref="root"
+    class="h-full w-full bg-gray-800 overflow-hidden select-none z-10 relative"
+  >
     <!-- Start Sky Viewer Canvas -->
     <canvas
-      ref="canvas"
       v-show="dimensions.x && dimensions.y && isReady"
+      ref="canvas"
       aria-label="All-Sky Star Observatory"
       role="presentation"
       unselectable="on"
@@ -14,8 +17,7 @@
         'cursor-move': !isDragging,
         'cursor-grabbing': isDragging
       }"
-    >
-    </canvas>
+    />
     <!-- End Sky Viewer Canvas -->
   </div>
 </template>

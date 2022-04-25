@@ -1,6 +1,10 @@
 <template>
   <div class="h-screen-adjust max-h-screen-adjust w-screen block relative overflow-hidden">
-    <SkyViewer ref="skyViewer" role="presentation" :clock="clock" :observer="observer" :options="options" />
+    <SkyViewer
+      :clock="clock"
+      :observer="observer"
+      :options="options"
+    />
   </div>
 </template>
 
@@ -53,15 +57,10 @@ export default defineComponent({
       isLive: true
     })
 
-    // const onActivePositionChange = (v: SkyViewerPosition, i: { isDragging: boolean }) => {
-    //   // active-position-change event emitted:
-    // }
-
     useAdjustedScreen()
 
     return {
       clock,
-      // onActivePositionChange,
       options,
       observer
     }
