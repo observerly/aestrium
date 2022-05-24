@@ -4,6 +4,7 @@
       :clock="clock"
       :observer="observer"
       :options="options"
+      @on:active-position-change="onActivePositionChange"
     />
   </div>
 </template>
@@ -17,7 +18,7 @@ import { useAdjustedScreen } from '@/composables'
 
 import { useInternalClock, useObserver } from '@observerly/useaestrium'
 
-// import { SkyViewerPosition } from '@/types'
+import type { SkyViewerPosition } from '@/types'
 
 const options = {
   live: true,
@@ -57,12 +58,20 @@ export default defineComponent({
       isLive: true
     })
 
+    const onActivePositionChange = (v: SkyViewerPosition, i: { isDragging: boolean }) => {
+       if (!i.isDragging) {
+         console.log(v)
+       }
+     }
+
     useAdjustedScreen()
 
     return {
       clock,
+      // onActivePositionChange,
       options,
-      observer
+      observer,
+      onActivePositionChange
     }
   }
 })
