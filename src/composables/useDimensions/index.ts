@@ -2,6 +2,8 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 import { useDevicePixelRatio, useResizeObserver, useWindowSize } from '@vueuse/core'
 
+import type { MaybeElementRef, MaybeElement } from '@vueuse/core'
+
 import type { CartesianCoordinate } from '@observerly/polaris'
 
 /**
@@ -14,7 +16,7 @@ export const useDimensions = () => {
   const { pixelRatio } = useDevicePixelRatio()
 
   // This is the HTMLElement root element as a ref:
-  const root = ref<HTMLElement | null>(null)
+  const root: MaybeElementRef<MaybeElement> = ref(null)
 
   const x = ref(0)
 

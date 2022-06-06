@@ -1,53 +1,10 @@
-import { ComputedRef, onMounted, ref, Ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import { throttledWatch } from '@vueuse/core'
 
 import { useDimensions } from '@/composables'
 
-import type { CartesianCoordinate } from '@observerly/polaris'
-
-export type UseCanvasReturn = {
-  /**
-   *
-   * reactive Canvas HTML Element (template $ref)
-   *
-   */
-  canvas: Ref<HTMLCanvasElement | null>
-  /**
-   *
-   * reactive optimised Offscreem Canvas
-   *
-   */
-  canvasOptimised: Ref<HTMLCanvasElement | OffscreenCanvas | null>
-  /**
-   *
-   * Canvas Rendering Context 2D
-   *
-   */
-  ctx: Ref<OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null>
-  /**
-   *
-   * reactive Root Parent HTML Element (template $ref)
-   *
-   */
-  root: Ref<HTMLElement | null>
-  /**
-   *
-   * Our predetermined canvas dimensions (width, height)
-   *
-   */
-  dimensions: ComputedRef<CartesianCoordinate>
-  /**
-   *
-   * The resolution of our Canvas
-   *
-   */
-  resolution: ComputedRef<number>
-}
-
-export interface UseCanvasProps extends Partial<UseCanvasReturn> {}
-
-export const useCanvas = (): UseCanvasReturn => {
+export const useCanvas = () => {
   // This is the canvas HTMLCanvasElement element as a ref:
   const canvas = ref<HTMLCanvasElement | null>(null)
 
@@ -99,3 +56,7 @@ export const useCanvas = (): UseCanvasReturn => {
     resolution
   }
 }
+
+export type UseCanvasReturn = ReturnType<typeof useCanvas>
+
+export interface UseCanvasProps extends Partial<UseCanvasReturn> {}
