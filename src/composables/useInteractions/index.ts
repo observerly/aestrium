@@ -2,6 +2,8 @@ import { ref } from 'vue'
 
 import { usePointer, useMousePressed } from '@vueuse/core'
 
+import type { MaybeElementRef, MaybeElement } from '@vueuse/core'
+
 import { useDrag } from '@vueuse/gesture'
 
 export interface UseInteractionsOptions {
@@ -10,7 +12,7 @@ export interface UseInteractionsOptions {
    * HTML Element to target for user interactions
    *
    */
-  element: HTMLElement | null
+  element: MaybeElementRef<MaybeElement>
 }
 
 /**
