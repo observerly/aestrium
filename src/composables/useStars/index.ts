@@ -191,21 +191,21 @@ export const useStars = (options: UseStarsOptions) => {
   const majorStars = ref([])
 
   const fetchMajorStars = async () => {
-    const response = await fetch('https://observerly.com/api/v3/stars/major')
+    const response = await fetch('https://vega.observerly.com/api/v1/stars/major')
     majorStars.value = await response.json()
   }
 
   const minorStars = ref([])
 
   const fetchMinorStars = async () => {
-    const response = await fetch('https://observerly.com/api/v3/stars/minor')
+    const response = await fetch('https://vega.observerly.com/api/v1/stars/minor')
     minorStars.value = await response.json()
   }
 
   const peripheralStars = ref([])
 
   const fetchPeripheralStars = async () => {
-    const response = await fetch('https://observerly.com/api/v3/stars/peripheral')
+    const response = await fetch('https://vega.observerly.com/api/v1/stars/peripheral')
     peripheralStars.value = await response.json()
   }
 
