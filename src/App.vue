@@ -1,5 +1,24 @@
 <template>
-  <div class="h-screen-adjust max-h-screen-adjust w-screen block relative overflow-hidden">
+  <div class="h-screen-adjust max-h-screen-adjust w-screen block relative">
+    <div class="h-full w-full absolute inset-0 z-50">
+      <div class="h-full w-full flex items-center justify-center">
+        <ObserverlyLogo
+          class="h-12 w-auto text-white"
+        />
+      </div>
+    </div>
+    
+    <div
+      class="
+      w-full
+      h-full
+      absolute
+      inset-0
+      backdrop-filter
+      backdrop-blur-2
+      bg-gray-800
+      bg-opacity-20"
+    />
     <SkyViewer
       :clock="clock"
       :observer="observer"
@@ -12,7 +31,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { SkyViewer } from '@/components'
+import { ObserverlyLogo, SkyViewer } from '@/components'
 
 import { useAdjustedScreen } from '@/composables'
 
@@ -23,35 +42,30 @@ import type { SkyViewerPosition } from '@/types'
 const options = {
   live: true,
   showStars: true,
-  showConstellations: true,
-  showSun: true,
-  showMoon: true,
-  showEcliptic: true,
+  showConstellations: false,
+  showSun: false,
+  showMoon: false,
+  showEcliptic: false,
   showCardinalPoints: true,
   gradient: [
     {
-      hex: '#4338CA',
+      hex: '#394151',
       stop: 0
-    },
-    {
-      hex: '#3730A3',
-      stop: 1.0
     }
   ]
 }
 
 export default defineComponent({
   components: {
+    ObserverlyLogo,
     SkyViewer
   },
   setup() {
-    // const observer = useObserver({
-    //   longitude: -24.622997508,
-    //   latitude: -70.40249839,
-    //   elevation: 16000
-    // })
-
-    const observer = useObserver({})
+    const observer = useObserver({
+      longitude: 19.2327933455,
+      latitude: -20.295115731,
+      elevation: 1600
+    })
 
     // Setup the internal clock, returning the latest datetime:
     const clock = useInternalClock({
