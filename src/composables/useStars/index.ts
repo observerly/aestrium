@@ -95,7 +95,7 @@ export type StarObserved = Body &
  */
 export const fetchMajorStars = async () => {
   try {
-    const response = await fetch('https://observerly.com/api/v3/stars/major')
+    const response = await fetch('https://vega.observerly.com/api/v1/stars/major')
     return await response.json()
   } catch (err) {
     console.error(err)
@@ -110,7 +110,7 @@ export const fetchMajorStars = async () => {
  */
 export const fetchMinorStars = async () => {
   try {
-    const response = await fetch('https://observerly.com/api/v3/stars/minor')
+    const response = await fetch('https://vega.observerly.com/api/v1/stars/minor')
     return await response.json()
   } catch (err) {
     console.error(err)
