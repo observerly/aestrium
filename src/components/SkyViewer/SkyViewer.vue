@@ -1,7 +1,7 @@
 <template>
   <div
     ref="root"
-    class="h-full w-full bg-gray-800 overflow-hidden select-none z-10 relative"
+    class="h-full w-full bg-gray-800"
   >
     <!-- Start Sky Viewer Canvas -->
     <canvas
@@ -12,7 +12,7 @@
       unselectable="on"
       tabindex="0"
       draggable="false"
-      class="h-full w-full absolute z-20 top-0 left-o right-0 bottom-0 overflow-hidden select-none"
+      class="h-full w-full overflow-hidden select-none"
       :class="{
         'cursor-move': !isDragging,
         'cursor-grabbing': isDragging
@@ -130,7 +130,7 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showConstellations ? props.options.showConstellations : false
+      show: props.options.showConstellations
     })
 
     // Setup the Sun:
@@ -145,7 +145,7 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showSun ? props.options.showSun : true
+      show: props.options.showSun
     })
 
     // Setup the Moon:
@@ -160,7 +160,7 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showMoon ? props.options.showMoon : true
+      show: props.options.showMoon
     })
 
     // Setup the Ecliptic:
@@ -172,7 +172,7 @@ export default defineComponent({
       dimensions,
       resolution,
       datetime: clock.value.currentDatetime,
-      show: props.options.showEcliptic ? props.options.showEcliptic : false
+      show: props.options.showEcliptic
     })
 
     // Setup the Cardinals:

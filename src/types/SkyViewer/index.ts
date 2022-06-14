@@ -20,49 +20,49 @@ export interface SkyViewerOptions {
    * @default true
    *
    */
-  live?: boolean
+  live: boolean
   /**
    *
    * is the Sky Viewer showing stars?
    * @default true
    *
    */
-  showStars?: boolean
+  showStars: boolean
   /**
    *
    * is the Sky Viewer showing constellations?
    * @default true
    *
    */
-  showConstellations?: boolean
+  showConstellations: boolean
   /**
    *
    * is the Sky Viewer showing the Sun?
    * @default true
    *
    */
-  showSun?: boolean
+  showSun: boolean
   /**
    *
    * is the Sky Viewer showing the Moon?
    * @default true
    *
    */
-  showMoon?: boolean
+  showMoon: boolean
   /**
    *
    * is the Sky Viewer showing the ecliptic?
    * @default true
    *
    */
-  showEcliptic?: boolean
+  showEcliptic: boolean
   /**
    *
    * is the Sky Viewer showing cardinals?
    * @default true
    *
    */
-  showCardinalPoints?: boolean
+  showCardinalPoints: boolean
   /**
    *
    * The background gradient to be applied to the Sky Viewer:
