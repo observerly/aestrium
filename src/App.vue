@@ -15,9 +15,9 @@
       absolute
       inset-0
       backdrop-filter
-      backdrop-blur-2
+      backdrop-blur-0
       bg-gray-800
-      bg-opacity-20"
+      bg-opacity-60"
     />
     <SkyViewer
       :clock="clock"
