@@ -42,6 +42,13 @@ export {
 export { useMoon, UseMoonOptions, UseMoonReturn, UseMoonProps } from '@/composables/useMoon'
 
 export {
+  useObserver,
+  UseObserverOptions,
+  UseObserverReturn,
+  UseObserverProps
+} from '@/composables/useObserver'
+
+export {
   useStars,
   UseStarsOptions,
   UseStarsReturn,
