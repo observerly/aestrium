@@ -1,0 +1,62 @@
+# Substitutions are used to make this dynamic. Their vars should be configured in the cloud build trigger.
+# Pass in the following substitution vars:
+# - _PACKAGE_NAME = The name of the package that this trigger is to deploy.
+#######################################################################################
+steps:
+  # get some secrets
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: "bash"
+    args:
+      [
+        "-c",
+        "gcloud secrets versions access latest --secret=github-auth-token > github-auth-token.txt",
+      ]
+  # make npmrc
+  - name: ubuntu
+    id: Making .npmrc
+    args:
+      [
+        "bash",
+        "-c",
+        'mv -f .npmrc-template .npmrc && sed -i -e "s/GITHUB_TOKEN/$(cat github-auth-token.txt)/g" .npmrc',
+      ]
+  # pull build cache
+  - name: gcr.io/cloud-builders/docker
+    id: Pulling build cache
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        docker pull gcr.io/$PROJECT_ID/${_PACKAGE_NAME}:latest || exit 0
+  # Build the container image for the package using the Dockerfile in the root
+  - name: gcr.io/cloud-builders/docker
+    id: Build container image using dockerfile
+    entrypoint: "bash"
+    args:
+      [
+        "-c",
+        "docker build -f build.Dockerfile -t gcr.io/$PROJECT_ID/${_PACKAGE_NAME}:latest --cache-from gcr.io/$PROJECT_ID/${_PACKAGE_NAME}:latest .",
+      ]
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/${_PACKAGE_NAME}:latest"]
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "beta",
+        "run",
+        "deploy",
+        "${_PACKAGE_NAME}",
+        "--image",
+        "gcr.io/$PROJECT_ID/${_PACKAGE_NAME}",
+        "--region",
+        "europe-west1",
+        "--platform",
+        "managed",
+        "--quiet",
+      ]
+      
+timeout: 1200s
+# Push container artefact to container registry..
+images: ["gcr.io/$PROJECT_ID/${_PACKAGE_NAME}:latest"]
