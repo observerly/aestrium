@@ -26,6 +26,13 @@ export {
 } from '@/composables/useEcliptic'
 
 export {
+  useEquatorialCoordinate,
+  UseEquatorialCoordinateOptions,
+  UseEquatorialCoordinateReturn,
+  UseEquatorialCoordinateProps
+} from '@/composables/useEquatorialCoordinate'
+
+export {
   useInteractions,
   UseInteractionsOptions,
   UseInteractionsReturn,
