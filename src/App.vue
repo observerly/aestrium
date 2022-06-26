@@ -33,9 +33,7 @@ import { defineComponent } from 'vue'
 
 import { ObserverlyLogo, SkyViewer } from '@/components'
 
-import { useAdjustedScreen } from '@/composables'
-
-import { useInternalClock, useObserver } from '@observerly/useaestrium'
+import { useInternalClock, useObserver, useAdjustedScreen } from '@/composables'
 
 import type { SkyViewerPosition } from '@/types'
 
