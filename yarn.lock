@@ -1133,15 +1133,6 @@
   resolved "https://npm.pkg.github.com/download/@observerly/polaris/0.53.0/7bfff59d87d51cfe2a229942b8d3b756831feede29f252d89d3eb69b9eb8f5a9"
   integrity sha512-QvtQ1O0XaoqciDvb4pGMDl2FPoF7SAJZ55Cm7n94RsF96HNRbxXsPlqyHnqKppHF96UrlDOhRITpMnCjbZxCVw==
 
-"@observerly/useaestrium@^0.13.0":
-  version "0.13.0"
-  resolved "https://npm.pkg.github.com/download/@observerly/useaestrium/0.13.0/15e31aa6c86c1df085b4f04348b0b0a01d03793207d1169cb9c577b09018036d#133b59a3bb0a7acc25c0fb879005a03af3a99db5"
-  integrity sha512-rMJe3yQkMireQbnq/fBlt7KOlfADSHVTiRniEMEAUNjQOU6yGoMz7pJBrFKZMbbVOBrcVK2InVnFbcCb4oi7Rg==
-  dependencies:
-    "@observerly/polaris" "^0.53.0"
-    "@vueuse/core" "^8.6.0"
-    vue "^3.2.37"
-
 "@rollup/plugin-typescript@^8.3.2":
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-8.3.2.tgz#e1b719e2ed3e752bbc092001656c48378f2d15f0"

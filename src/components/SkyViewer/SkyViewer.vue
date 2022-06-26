@@ -29,9 +29,9 @@ import { useIntervalFn } from '@vueuse/core'
 
 import { SkyViewerOptions, SkyViewerPosition } from '@/types'
 
-import type { UseInternalClockReturn, UseObserverReturn } from '@observerly/useaestrium'
+import type { UseInternalClockReturn, UseObserverReturn } from '@/composables'
 
-import { useEquatorialCoordinate } from '@observerly/useaestrium'
+import { useEquatorialCoordinate } from '@/composables'
 
 import {
   useCardinals,
