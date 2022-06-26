@@ -128,6 +128,9 @@ playground/
 
 src/**/*.js
 
+# unit Vitest Tests:
+coverage
+
 # e2e Cypress Tests:
 tests/e2e/videos/*
 
