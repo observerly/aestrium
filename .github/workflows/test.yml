@@ -45,8 +45,8 @@ jobs:
       - name: Install project dependencies 👨🏻‍💻
         run: yarn
 
-      # - name: Run jest tests 🧪
-      #   run: npm run test:unit -- --collectCoverage
+      - name: Run vitest tests 🧪
+        run: npm run test:unit -- --collectCoverage
 
   e2e:
     runs-on: ${{ matrix.os }}
