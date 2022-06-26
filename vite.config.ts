@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 
 import vue from '@vitejs/plugin-vue'
@@ -30,5 +31,10 @@ export default defineConfig({
         replacement: path.resolve(__dirname, 'src') + '/$1'
       }
     ]
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    testTimeout: 20000
   }
 })
