@@ -32,6 +32,13 @@ export {
   UseInteractionsProps
 } from '@/composables/useInteractions'
 
+export {
+  useInternalClock,
+  UseInternalClockOptions,
+  UseInternalClockReturn,
+  UseInternalClockProps
+} from '@/composables/useInternalClock'
+
 export { useMoon, UseMoonOptions, UseMoonReturn, UseMoonProps } from '@/composables/useMoon'
 
 export {
