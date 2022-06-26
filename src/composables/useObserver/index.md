@@ -9,7 +9,7 @@ Reactive observer that returns the most suitable geographic and astronomical pos
 ## Usage
 
 ```ts
-import { useObserver} from '@observerly/useaestrium
+import { useObserver} from '@observerly/aestrium
 
 // This will either return the default Mauna Kea position or the "users"
 // current geographic location (based off device permissions):
@@ -17,7 +17,7 @@ const { longitude, latitude } = useObserver({})
 ```
 
 ```ts
-import { useObserver} from '@observerly/useaestrium
+import { useObserver} from '@observerly/aestrium
 
 // Setup a specific observer:
 const { longitude, latitude } = useObserver({
@@ -30,7 +30,7 @@ const { longitude, latitude } = useObserver({
 We can specify a location which overrides all other defaults (params, detected location and default):
 
 ```ts
-import { useObserver} from '@observerly/useaestrium
+import { useObserver} from '@observerly/aestrium
 
 // Setup a specific observer:
 const { longitude, latitude } = useObserver({

@@ -9,7 +9,7 @@ Reactive internal clock that runs on an interval
 ## Usage
 
 ```ts
-import { useInternalClock } from '@observerly/useaestrium
+import { useInternalClock } from '@observerly/aestrium
 
 // Setup the internal clock , returning the latest datetime:
 const {
