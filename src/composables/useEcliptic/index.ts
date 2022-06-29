@@ -62,6 +62,12 @@ export interface UseEclipticOptions {
    *
    */
   show: boolean
+  /**
+   * 
+   * are keyboard controls enabled?
+   * 
+   */
+   controls?: boolean
 }
 
 /**
@@ -72,7 +78,7 @@ export interface UseEclipticOptions {
  * @output
  */
 export const useEcliptic = (options: UseEclipticOptions) => {
-  const { longitude, latitude, azOffset, altOffset, dimensions, resolution, datetime, show } = options
+  const { longitude, latitude, azOffset, altOffset, dimensions, resolution, datetime, show, controls = true } = options
 
   // Show the Sun:
   const showEcliptic = ref<boolean>(show)
@@ -81,16 +87,18 @@ export const useEcliptic = (options: UseEclipticOptions) => {
     showEcliptic.value = !showEcliptic.value
   }
 
-  onKeyStroke(
-    'E',
-    (e: KeyboardEvent) => {
-      e.preventDefault()
-      toggleEcliptic()
-    },
-    {
-      target: window
-    }
-  )
+  if (controls) {
+    onKeyStroke(
+      'E',
+      (e: KeyboardEvent) => {
+        e.preventDefault()
+        toggleEcliptic()
+      },
+      {
+        target: window
+      }
+    )
+  }
 
   const ecliptic = computed<EclipticCoordinate[]>(() => {
     const ecliptic: EquatorialCoordinate[] = getSolarEcliptic(datetime.value)
