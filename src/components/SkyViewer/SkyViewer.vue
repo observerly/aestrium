@@ -131,7 +131,7 @@ export default defineComponent({
       x,
       y,
       show: props.options.showConstellations,
-      controls: props.options.controls || true
+      controls: props.options.controls
     })
 
     // Setup the Sun:
@@ -147,7 +147,7 @@ export default defineComponent({
       x,
       y,
       show: props.options.showSun,
-      controls: props.options.controls || true
+      controls: props.options.controls
     })
 
     // Setup the Moon:
@@ -163,7 +163,7 @@ export default defineComponent({
       x,
       y,
       show: props.options.showMoon,
-      controls: props.options.controls || true
+      controls: props.options.controls
     })
 
     // Setup the Ecliptic:
@@ -176,7 +176,7 @@ export default defineComponent({
       resolution,
       datetime: clock.value.currentDatetime,
       show: props.options.showEcliptic,
-      controls: props.options.controls || true
+      controls: props.options.controls
     })
 
     // Setup the Cardinals:
@@ -185,7 +185,7 @@ export default defineComponent({
       altOffset: observer.value.altOffset,
       dimensions,
       resolution,
-      controls: props.options.controls || true
+      controls: props.options.controls
     })
 
     const {
