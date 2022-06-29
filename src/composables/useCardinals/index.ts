@@ -62,6 +62,12 @@ export interface UseCardinalsOptions {
    *
    */
   resolution: ComputedRef<number>
+  /**
+   * 
+   * are keyboard controls enabled?
+   * 
+   */
+  controls?: boolean
 }
 
 /**
@@ -72,7 +78,7 @@ export interface UseCardinalsOptions {
  * @returns
  */
 export const useCardinals = (options: UseCardinalsOptions) => {
-  const { azOffset, altOffset, dimensions, resolution } = options
+  const { azOffset, altOffset, dimensions, resolution, controls = true } = options
 
   const showCardinals = ref(true)
 
@@ -80,16 +86,18 @@ export const useCardinals = (options: UseCardinalsOptions) => {
     showCardinals.value = !showCardinals.value
   }
 
-  onKeyStroke(
-    'd',
-    (e: KeyboardEvent) => {
-      e.preventDefault()
-      toggleCardinals()
-    },
-    {
-      target: window
-    }
-  )
+  if (controls) {
+    onKeyStroke(
+      'd',
+      (e: KeyboardEvent) => {
+        e.preventDefault()
+        toggleCardinals()
+      },
+      {
+        target: window
+      }
+    )
+  }
 
   const yOffset = computed(() => {
     return dimensions.value.y - 20
