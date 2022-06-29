@@ -78,6 +78,12 @@ export interface UseMoonOptions {
    *
    */
   show: boolean
+  /**
+   * 
+   * are keyboard controls enabled?
+   * 
+   */
+   controls?: boolean
 }
 
 /**
@@ -100,7 +106,8 @@ export const useMoon = (options: UseMoonOptions) => {
     isDragging,
     x,
     y,
-    show
+    show,
+    controls = true
   } = options
 
   // Show the Moon:
@@ -110,17 +117,20 @@ export const useMoon = (options: UseMoonOptions) => {
     showMoon.value = !showMoon.value
   }
 
-  // Toggle the Moon on keystroke of "M":
-  onKeyStroke(
-    'M',
-    (e: KeyboardEvent) => {
-      e.preventDefault()
-      toggleMoon()
-    },
-    {
-      target: window
-    }
-  )
+  if (controls) {
+    // Toggle the Moon on keystroke of "M":
+    onKeyStroke(
+      'M',
+      (e: KeyboardEvent) => {
+        e.preventDefault()
+        toggleMoon()
+      },
+      {
+        target: window
+      }
+    )
+  }
+  
 
   const moon = computed<MoonObserved>(() => {
     const width = dimensions.value.x
