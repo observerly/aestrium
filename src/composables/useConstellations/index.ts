@@ -83,6 +83,12 @@ export interface UseConstellationOptions {
    *
    */
   show: boolean
+  /**
+   * 
+   * are keyboard controls enabled?
+   * 
+   */
+   controls?: boolean
 }
 
 /**
@@ -104,7 +110,8 @@ export const useConstellations = (options: UseConstellationOptions) => {
     isDragging,
     x,
     y,
-    show
+    show,
+    controls = true
   } = options
 
   // Show all constellations:
@@ -115,17 +122,20 @@ export const useConstellations = (options: UseConstellationOptions) => {
     showConstellations.value = !showConstellations.value
   }
 
-  // on key stroke listener for key 'c' to toggle constellations on/off:
-  onKeyStroke(
-    'c',
-    (e: KeyboardEvent) => {
-      e.preventDefault()
-      toggleConstellations()
-    },
-    {
-      target: window
-    }
-  )
+  if (controls) {
+    // on key stroke listener for key 'c' to toggle constellations on/off:
+    onKeyStroke(
+      'c',
+      (e: KeyboardEvent) => {
+        e.preventDefault()
+        toggleConstellations()
+      },
+      {
+        target: window
+      }
+    )
+  }
+  
 
   // Active { x, y } Mouse Position Intersecting Constellation:
   const constellation = ref('')
