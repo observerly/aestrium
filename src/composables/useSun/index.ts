@@ -76,6 +76,12 @@ export interface UseSunOptions {
    *
    */
   show: boolean
+  /**
+   * 
+   * are keyboard controls enabled?
+   * 
+   */
+  controls?: boolean
 }
 
 export const useSun = (options: UseSunOptions) => {
@@ -90,7 +96,8 @@ export const useSun = (options: UseSunOptions) => {
     isDragging,
     x,
     y,
-    show
+    show,
+    controls = true
   } = options
 
   // Show the Sun:
@@ -100,17 +107,19 @@ export const useSun = (options: UseSunOptions) => {
     showSun.value = !showSun.value
   }
 
-  // Toggle the Sun on keystroke of "S":
-  onKeyStroke(
-    'S',
-    (e: KeyboardEvent) => {
-      e.preventDefault()
-      showSun.value = !showSun.value
-    },
-    {
-      target: window
-    }
-  )
+  if (controls) {
+    // Toggle the Sun on keystroke of "S":
+    onKeyStroke(
+      'S',
+      (e: KeyboardEvent) => {
+        e.preventDefault()
+        showSun.value = !showSun.value
+      },
+      {
+        target: window
+      }
+    )
+  } 
 
   const sun = computed<SunObserved>(() => {
     const width = dimensions.value.x
