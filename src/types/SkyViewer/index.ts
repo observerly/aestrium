@@ -23,6 +23,13 @@ export interface SkyViewerOptions {
   live: boolean
   /**
    *
+   * are keyboard controls enabled for the SkyViewer?
+   * @default true
+   *
+   */
+  controls?: boolean
+  /**
+   *
    * is the Sky Viewer showing stars?
    * @default true
    *

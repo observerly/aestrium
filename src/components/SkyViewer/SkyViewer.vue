@@ -130,7 +130,8 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showConstellations
+      show: props.options.showConstellations,
+      controls: props.options.controls || true
     })
 
     // Setup the Sun:
@@ -145,7 +146,8 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showSun
+      show: props.options.showSun,
+      controls: props.options.controls || true
     })
 
     // Setup the Moon:
@@ -160,7 +162,8 @@ export default defineComponent({
       isDragging,
       x,
       y,
-      show: props.options.showMoon
+      show: props.options.showMoon,
+      controls: props.options.controls || true
     })
 
     // Setup the Ecliptic:
@@ -172,7 +175,8 @@ export default defineComponent({
       dimensions,
       resolution,
       datetime: clock.value.currentDatetime,
-      show: props.options.showEcliptic
+      show: props.options.showEcliptic,
+      controls: props.options.controls || true
     })
 
     // Setup the Cardinals:
@@ -180,7 +184,8 @@ export default defineComponent({
       azOffset: observer.value.azOffset,
       altOffset: observer.value.altOffset,
       dimensions,
-      resolution
+      resolution,
+      controls: props.options.controls || true
     })
 
     const {
