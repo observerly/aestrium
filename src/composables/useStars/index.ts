@@ -10,7 +10,7 @@ import {
   normaliseStellarMagnitude
 } from '@observerly/polaris'
 
-import { drawBody, intersectDistance } from '@/utils'
+import { drawBody, intersectDistance } from '../../utils'
 
 const hasBayer = (star: Body): boolean => star.bayer.length > 0
 

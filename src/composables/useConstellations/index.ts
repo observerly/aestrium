@@ -11,9 +11,9 @@ import {
   getConstellation
 } from '@observerly/polaris'
 
-import { drawLine } from '@/utils'
-
 import { onKeyStroke } from '@vueuse/core'
+
+import { drawLine } from '../../utils'
 
 export interface UseConstellationOptions {
   /**

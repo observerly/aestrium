@@ -6,7 +6,7 @@ import { convertEquatorialToHorizontal, convertHorizontalToStereo, getMoon } fro
 
 import type { CartesianCoordinate, Moon } from '@observerly/polaris'
 
-import { drawBody } from '@/utils'
+import { drawBody } from '../../utils'
 
 export type MoonObserved = Moon & CartesianCoordinate
 

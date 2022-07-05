@@ -27,22 +27,21 @@ import { computed, defineComponent, onMounted, PropType, toRef, watch } from 'vu
 
 import { useIntervalFn } from '@vueuse/core'
 
-import { SkyViewerOptions, SkyViewerPosition } from '@/types'
+import { SkyViewerOptions, SkyViewerPosition } from '../../types'
 
-import type { UseInternalClockReturn, UseObserverReturn } from '@/composables'
-
-import { useEquatorialCoordinate } from '@/composables'
+import type { UseInternalClockReturn, UseObserverReturn } from '../../composables'
 
 import {
   useCardinals,
   useConstellations,
   useCanvas,
   useEcliptic,
+  useEquatorialCoordinate,
   useMoon,
   useStars,
   useSun,
   useInteractions
-} from '@/composables'
+} from '../../composables'
 
 export default defineComponent({
   name: 'SkyViewer',

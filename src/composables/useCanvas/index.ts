@@ -2,7 +2,7 @@ import { onMounted, ref } from 'vue'
 
 import { throttledWatch } from '@vueuse/core'
 
-import { useDimensions } from '@/composables'
+import { useDimensions } from '../../composables'
 
 export const useCanvas = () => {
   // This is the canvas HTMLCanvasElement element as a ref:

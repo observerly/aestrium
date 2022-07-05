@@ -1,59 +1,59 @@
-export { useAdjustedScreen } from '@/composables/useAdjustedScreen'
+export { useAdjustedScreen } from './useAdjustedScreen'
 
-export { useCanvas, UseCanvasReturn, UseCanvasProps } from '@/composables/useCanvas'
+export { useCanvas, UseCanvasReturn, UseCanvasProps } from './useCanvas'
 
 export {
   useCardinals,
   UseCardinalsOptions,
   UseCardinalsReturn,
   UseCardinalsProps
-} from '@/composables/useCardinals'
+} from './useCardinals'
 
 export {
   useConstellations,
   UseConstellationOptions,
   UseConstellationsReturn,
   UseConstellationsProps
-} from '@/composables/useConstellations'
+} from './useConstellations'
 
-export { useDimensions, UseDimensionsReturn, UseDimensionsProps } from '@/composables/useDimensions'
+export { useDimensions, UseDimensionsReturn, UseDimensionsProps } from './useDimensions'
 
 export {
   useEcliptic,
   UseEclipticOptions,
   UseEclipticReturn,
   UseEclipticProps
-} from '@/composables/useEcliptic'
+} from './useEcliptic'
 
 export {
   useEquatorialCoordinate,
   UseEquatorialCoordinateOptions,
   UseEquatorialCoordinateReturn,
   UseEquatorialCoordinateProps
-} from '@/composables/useEquatorialCoordinate'
+} from './useEquatorialCoordinate'
 
 export {
   useInteractions,
   UseInteractionsOptions,
   UseInteractionsReturn,
   UseInteractionsProps
-} from '@/composables/useInteractions'
+} from './useInteractions'
 
 export {
   useInternalClock,
   UseInternalClockOptions,
   UseInternalClockReturn,
   UseInternalClockProps
-} from '@/composables/useInternalClock'
+} from './useInternalClock'
 
-export { useMoon, UseMoonOptions, UseMoonReturn, UseMoonProps } from '@/composables/useMoon'
+export { useMoon, UseMoonOptions, UseMoonReturn, UseMoonProps } from './useMoon'
 
 export {
   useObserver,
   UseObserverOptions,
   UseObserverReturn,
   UseObserverProps
-} from '@/composables/useObserver'
+} from './useObserver'
 
 export {
   useStars,
@@ -63,6 +63,6 @@ export {
   useStarsMagnitude,
   fetchMajorStars,
   fetchMinorStars
-} from '@/composables/useStars'
+} from './useStars'
 
-export { useSun, UseSunOptions, UseSunReturn, UseSunProps } from '@/composables/useSun'
+export { useSun, UseSunOptions, UseSunReturn, UseSunProps } from './useSun'
