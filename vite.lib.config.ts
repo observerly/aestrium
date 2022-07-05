@@ -27,17 +27,17 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'aestrium',
+      name: '@observerly/aestrium',
       fileName: format => `aestrium.${format}.js`
     },
     rollupOptions: {
       external: ['vue', '@observerly/polaris'],
       output: {
-        sourcemap: false,
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
+          '@observerly/polaris': '@observerly/polaris'
         }
       }
     }
