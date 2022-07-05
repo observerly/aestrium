@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "lib": "vue-tsc --emitDeclarationOnly && vite build --config vite.lib.config.ts",
+    "lib": "tsc --noEmit && vue-tsc --noEmit && vite build --config vite.lib.config.ts",
     "preview": "vite preview",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write",

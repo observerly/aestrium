@@ -30,6 +30,7 @@ export default defineConfig({
       name: '@observerly/aestrium',
       fileName: format => `aestrium.${format}.js`
     },
+    sourcemap: true,
     rollupOptions: {
       external: ['vue', '@observerly/polaris'],
       output: {
