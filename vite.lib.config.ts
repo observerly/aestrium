@@ -33,6 +33,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['vue', '@observerly/polaris'],
       output: {
+        sourcemap: true,
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
