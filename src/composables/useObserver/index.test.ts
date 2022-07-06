@@ -10,6 +10,8 @@ import {
   it
 } from 'vitest'
 
+import { mount } from '@vue/test-utils'
+
 import {
   defineComponent,
   nextTick
@@ -78,5 +80,35 @@ describe('useObserver', () => {
         expect(latitude.value).toBe(-70.40249839)
       }
     })
+  })
+
+  it('Should Be At Where We Tell It Via Set Methods', () => {
+    const UseObserverComponent = defineComponent({
+      setup() {
+        const { longitude, latitude, setLongitude, setLatitude } = useObserver({
+          longitude: -24.622997508,
+          latitude: -70.40249839
+        })
+
+        return {
+          longitude,
+          setLongitude,
+          latitude,
+          setLatitude,
+        }
+      },
+      template: `<div>{{ latitude }} {{ longitude }}</div>`
+    })
+
+    const wrapper = mount(UseObserverComponent)
+    
+    expect(wrapper.vm.longitude).toBe(-24.622997508)
+    expect(wrapper.vm.latitude).toBe(-70.40249839)
+
+    wrapper.vm.setLongitude(18.4904101)
+    wrapper.vm.setLatitude(-22.9576402)
+
+    expect(wrapper.vm.longitude).toBe(18.4904101)
+    expect(wrapper.vm.latitude).toBe(-22.9576402)
   })
 })
