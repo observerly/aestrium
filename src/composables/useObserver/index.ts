@@ -2,7 +2,8 @@
 import {
   computed,
   ref,
-  ComputedRef
+  ComputedRef,
+  readonly
 } from 'vue'
 
 import {
@@ -86,10 +87,16 @@ export const useObserver = (options?: UseObserverOptions) => {
     timeout: Infinity
   })
 
+  const observer = ref({
+    longitude: lon,
+    latitude: lat,
+    elevation: ele
+  })
+
   const longitude: ComputedRef<number> = computed<number>(() => {
     // Hard-Set Reactive Props Has Preference:
-    if (lon !== Infinity && validateLongitude(lon)) {
-      return lon
+    if (observer.value.longitude !== Infinity && validateLongitude(observer.value.longitude)) {
+      return observer.value.longitude
     }
 
     // Params Override Have Second Preference:
@@ -105,10 +112,14 @@ export const useObserver = (options?: UseObserverOptions) => {
     return locatedAt.value && locatedAt.value > 0 ? coords.value.latitude : -155.824615
   })
 
+  const setLongitude = (longitude: number) => {
+    observer.value.longitude = longitude
+  }
+
   const latitude: ComputedRef<number> = computed<number>(() => {
     // Hard-Set Reactive Props Has Preference:
-    if (lat !== Infinity && validateLongitude(lat)) {
-      return lat
+    if (observer.value.latitude !== Infinity && validateLongitude(observer.value.latitude)) {
+      return observer.value.latitude
     }
 
     // Params Override Have Second Preference:
@@ -124,7 +135,15 @@ export const useObserver = (options?: UseObserverOptions) => {
     return locatedAt.value && locatedAt.value > 0 ? coords.value.latitude : 20.005039
   })
 
+  const setLatitude = (latitude: number) => {
+    observer.value.latitude = latitude
+  }
+
   const elevation = ref(ele)
+
+  const setElevation = (elevation: number) => {
+    observer.value.elevation = elevation
+  }
 
   // Azimuthal offset for Observer's heading in α:
   const azOffset = ref(0)
@@ -201,9 +220,12 @@ export const useObserver = (options?: UseObserverOptions) => {
 
   return {
     // Observer Geolocation Coordinates:
+    observer: readonly(observer),
     longitude,
     latitude,
     elevation,
+    setLongitude,
+    setLatitude,
     // Observer Horizontal Offset:
     azOffset,
     altOffset,
