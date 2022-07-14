@@ -1,6 +1,5 @@
 // Export all default components:
 export {
-  ObserverlyLogo,
   SkyViewer
 } from './components'
 
