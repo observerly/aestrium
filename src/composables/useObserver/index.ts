@@ -173,10 +173,34 @@ export const useObserver = (options?: UseObserverOptions) => {
     altOffset.value -= 0.5
   })
 
+  const isSlewingToOffset = ref(false)
+
+  const toggleIsSlewingToOffset = () => {
+    isSlewingToOffset.value = !isSlewingToOffset.value
+  }
+
   // Set the horizontal offset:
   const setHorizontalOffset = (offset: HorizontalCoordinate): void => {
     azOffset.value = offset.az
     altOffset.value = offset.alt
+  }
+
+  // Set the horizontal offset with a slew effect:
+  const setHorizontalOffsetSlew = async (offset: HorizontalCoordinate): Promise<void> => {
+    toggleIsSlewingToOffset()
+
+    function asyncSetTimeout(ms: number) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    const step = Math.abs(azOffset.value - offset.az) / 25
+
+    while (Math.round(azOffset.value) !== Math.round(offset.az)) {
+      await asyncSetTimeout(10)
+      azOffset.value += (step * Math.sign(offset.az)) 
+    }
+
+    toggleIsSlewingToOffset()
   }
 
   const usingDeviceOrientation = ref(false)
@@ -229,7 +253,10 @@ export const useObserver = (options?: UseObserverOptions) => {
     // Observer Horizontal Offset:
     azOffset,
     altOffset,
+    isSlewingToOffset,
+    toggleIsSlewingToOffset,
     setHorizontalOffset,
+    setHorizontalOffsetSlew,
     // Observer Orientation:
     usingDeviceOrientation,
     toggleUsingDeviceOrientation,
