@@ -3,7 +3,7 @@
     <div class="h-full w-full absolute inset-0 z-50">
       <div class="h-full w-full flex items-center justify-center">
         <ObserverlyLogo
-          class="h-12 w-auto text-white"
+          class="h-10 w-auto text-white"
         />
       </div>
     </div>
@@ -28,9 +28,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script setup lang="ts">
 import { ObserverlyLogo, SkyViewer } from '@/components'
 
 import { useInternalClock, useObserver, useAdjustedScreen } from '@/composables'
@@ -54,40 +52,22 @@ const options = {
   ]
 }
 
-export default defineComponent({
-  components: {
-    ObserverlyLogo,
-    SkyViewer
-  },
-  setup() {
-    const observer = useObserver({
-      longitude: 19.2327933455,
-      latitude: -20.295115731,
-      elevation: 1600
-    })
-
-    // Setup the internal clock, returning the latest datetime:
-    const clock = useInternalClock({
-      isLive: true
-    })
-
-    const onActivePositionChange = (v: SkyViewerPosition, i: { isDragging: boolean }) => {
-       if (!i.isDragging) {
-         console.log(v)
-       }
-     }
-
-    useAdjustedScreen()
-
-    return {
-      clock,
-      // onActivePositionChange,
-      options,
-      observer,
-      onActivePositionChange
-    }
-  }
+const observer = useObserver({
+  longitude: 19.2327933455,
+  latitude: -20.295115731,
+  elevation: 1600
 })
+
+// Setup the internal clock, returning the latest datetime:
+const clock = useInternalClock({
+  isLive: true
+})
+
+const onActivePositionChange = (v: SkyViewerPosition, i: { isDragging: boolean }) => {
+  return i.isDragging && v.top
+}
+
+useAdjustedScreen()
 </script>
 
 <style>
