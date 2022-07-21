@@ -41,3 +41,25 @@ const { longitude, latitude } = useObserver({
 ```
 
 See the [Type Declarations](#type-declarations) for more options.
+
+We can slew to a particular horizontal coordinate by using:
+
+```ts
+import { useObserver} from '@observerly/aestrium
+
+// Setup a specific observer:
+const { longitude, latitude, setHorizontalOffsetSlew } = useObserver({
+  longitude: -24.622997508,
+  latitude: -70.40249839,
+  elevation: 16000
+})
+
+const setHorizontalOffset = () => {
+  setHorizontalOffsetSlew(
+    {
+      az: -89.56398991,
+      alt: 0
+    }
+  )
+}
+```
