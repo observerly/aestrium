@@ -3,13 +3,15 @@ import {
   computed,
   ref,
   ComputedRef,
-  readonly
+  readonly,
+  watch
 } from 'vue'
 
 import {
   onKeyStroke,
   useEventListener,
   useGeolocation,
+  useRafFn,
   useUrlSearchParams
 } from '@vueuse/core'
 
@@ -179,6 +181,11 @@ export const useObserver = (options?: UseObserverOptions) => {
     isSlewingToOffset.value = !isSlewingToOffset.value
   }
 
+  const horizontalObserverOffset = ref({
+    az: 0,
+    alt: 0
+  })
+
   // Set the horizontal offset:
   const setHorizontalOffset = (offset: HorizontalCoordinate): void => {
     azOffset.value = offset.az
@@ -187,21 +194,49 @@ export const useObserver = (options?: UseObserverOptions) => {
 
   // Set the horizontal offset with a slew effect:
   const setHorizontalOffsetSlew = async (offset: HorizontalCoordinate): Promise<void> => {
+    if (isSlewingToOffset.value) return
     toggleIsSlewingToOffset()
-
-    function asyncSetTimeout(ms: number) {
-      return new Promise(resolve => setTimeout(resolve, ms))
-    }
-
-    const step = Math.abs(azOffset.value - offset.az) / 25
-
-    while (Math.round(azOffset.value) !== Math.round(offset.az)) {
-      await asyncSetTimeout(10)
-      azOffset.value += (step * Math.sign(offset.az)) 
-    }
-
-    toggleIsSlewingToOffset()
+    horizontalObserverOffset.value = offset
+    resume()
   }
+
+  const { pause, resume } = useRafFn(() => {
+    if (Math.round(azOffset.value) !== Math.round(horizontalObserverOffset.value.az)) {
+      const azStep = Math.abs(azOffset.value - horizontalObserverOffset.value.az) / 20
+      azOffset.value += (azStep * Math.sign(horizontalObserverOffset.value.az)) 
+    }
+
+    if (Math.round(altOffset.value) !== Math.round(horizontalObserverOffset.value.alt)) {
+      const altStep = Math.abs(altOffset.value - horizontalObserverOffset.value.alt) / 20
+      altOffset.value += (altStep * Math.sign(horizontalObserverOffset.value.alt)) 
+    }
+  })
+
+  watch(azOffset, () => {
+    // If the observer is slewing to an offset, return
+    if (Math.round(azOffset.value) !== Math.round(horizontalObserverOffset.value.az)) {
+      return
+    }
+    // Else, we can puase the request animation frame loop:
+    pause()
+
+    toggleIsSlewingToOffset()
+  }, {
+    immediate: true
+  })
+
+  watch(altOffset, () => {
+    // If the observer is slewing to an offset, return
+    if (Math.round(altOffset.value) !== Math.round(horizontalObserverOffset.value.alt)) {
+      return
+    }
+    // Else, we can puase the request animation frame loop:
+    pause()
+
+    toggleIsSlewingToOffset()
+  }, {
+    immediate: true
+  })
 
   const usingDeviceOrientation = ref(false)
 
