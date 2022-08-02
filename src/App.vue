@@ -38,6 +38,8 @@ import type { SkyViewerPosition } from '@/types'
 const options = {
   live: true,
   enabled: true,
+  controls: true,
+  interactions: true,
   showStars: true,
   showConstellations: false,
   showSun: false,

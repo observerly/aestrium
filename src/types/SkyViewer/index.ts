@@ -29,6 +29,12 @@ export interface SkyViewerOptions {
    */
   controls?: boolean
   /**
+   * 
+   * are mouse and gesture interactions enabled for the SkyViewer?
+   * 
+   */
+  interactions?: boolean
+  /**
    *
    * is the Sky Viewer showing stars?
    * @default true
