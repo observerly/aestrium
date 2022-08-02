@@ -83,25 +83,27 @@ export default defineComponent({
     })
 
     // watch the change the x position and ensure we are dragging:
-    watch(x, (prevX, newX) => {
-      isDragging.value = pressed.value
+    if (props.options.interactions) {
+      watch(x, (prevX, newX) => {
+        isDragging.value = pressed.value
 
-      if (
-        pressed.value &&
-        isDragging.value &&
-        !isTapping.value &&
-        !props.observer.usingDeviceOrientation?.value
-      ) {
-        if (prevX - newX < dimensions.value.x / 3 && prevX - newX > -dimensions.value.x / 3) {
-          const az = (props.observer.azOffset.value + (newX - prevX) / 6) % 360
+        if (
+          pressed.value &&
+          isDragging.value &&
+          !isTapping.value &&
+          !props.observer.usingDeviceOrientation?.value
+        ) {
+          if (prevX - newX < dimensions.value.x / 3 && prevX - newX > -dimensions.value.x / 3) {
+            const az = (props.observer.azOffset.value + (newX - prevX) / 6) % 360
 
-          props.observer.setHorizontalOffset({
-            alt: 0,
-            az: az
-          })
+            props.observer.setHorizontalOffset({
+              alt: 0,
+              az: az
+            })
+          }
         }
-      }
-    })
+      })
+    }
 
     // Setup the Stars:
     const { star, drawStars } = useStars({
@@ -202,6 +204,8 @@ export default defineComponent({
     })
 
     watch(pressed, () => {
+      if (!props.options.interactions) return
+ 
       if (pressed.value && star.value) {
         setEquatorialCoordinate({
           ra: parseInt(star.value.ra),
