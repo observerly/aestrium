@@ -13,6 +13,12 @@ export interface UseInteractionsOptions {
    *
    */
   element: MaybeElementRef<MaybeElement>
+  /**
+   * 
+   * are interaction controls enabled?
+   * 
+   */
+  isEnabled?: boolean
 }
 
 /**
@@ -23,7 +29,7 @@ export interface UseInteractionsOptions {
  * @returns UseInteractionsReturn
  */
 export const useInteractions = (options: UseInteractionsOptions) => {
-  const { element } = options
+  const { element, isEnabled = true } = options
 
   // Frame Dragging Boolean:
   const isDragging = ref(false)
@@ -43,19 +49,21 @@ export const useInteractions = (options: UseInteractionsOptions) => {
     touch: true
   })
 
-  useDrag(
-    ({ tap, dragging }): void => {
-      // Are we tapping the Sky Viewer frame?
-      isTapping.value = tap
-      // Are we dragging the Sky Viewer frame?
-      isDragging.value = dragging
-    },
-    {
-      domTarget: element,
-      filterTaps: false,
-      preventWindowScrollY: true
-    }
-  )
+  if (isEnabled) {
+    useDrag(
+      ({ tap, dragging }): void => {
+        // Are we tapping the Sky Viewer frame?
+        isTapping.value = tap
+        // Are we dragging the Sky Viewer frame?
+        isDragging.value = dragging
+      },
+      {
+        domTarget: element,
+        filterTaps: false,
+        preventWindowScrollY: true
+      }
+    )
+  }
 
   return {
     isDragging,
